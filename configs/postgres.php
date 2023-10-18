@@ -1,9 +1,11 @@
 <?php
 
-class Connection {
+class Connection
+{
     private $connection;
 
-    public function __construct() {
+    public function __construct()
+    {
         $dotenv = parse_ini_file(__DIR__ . '/../.env');
 
         $dbHost = $dotenv['DB_HOST'];
@@ -25,7 +27,8 @@ class Connection {
         }
     }
 
-    public function query($sql) {
+    public function query($sql)
+    {
         return pg_query($this->connection, $sql);
     }
 
@@ -34,8 +37,11 @@ class Connection {
         return $this->connection;
     }
 
-    
-    public function close() {
+
+    public function close()
+    {
         pg_close($this->connection);
     }
 }
+
+?>

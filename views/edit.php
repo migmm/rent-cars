@@ -24,7 +24,7 @@
         <select name="category_id" required>
 
             <?php
-            include('./configs/database.php');
+            include(__DIR__. './configs/database.php');
             // Realiza una consulta para obtener todas las categorías desde la tabla car_category
             $query = "SELECT * FROM car_category";
             $result = $connection->query($query);

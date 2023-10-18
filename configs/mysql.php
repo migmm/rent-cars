@@ -7,7 +7,7 @@ class Connection
     public function __construct()
     {
         $dotenv = parse_ini_file(__DIR__ . '/../.env');
-        
+
         $dbHost = $dotenv['DB_HOST'];
         $dbPort = $dotenv['DB_PORT'];
         $dbName = $dotenv['DB_NAME'];
@@ -19,7 +19,7 @@ class Connection
             $dbUser,
             $dbPassword,
             $dbName,
-                $dbPort,
+            $dbPort,
         );
 
         if (!$this->connection) {
@@ -41,3 +41,5 @@ class Connection
         mysqli_close($this->connection);
     }
 }
+
+?>

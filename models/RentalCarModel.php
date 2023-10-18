@@ -1,5 +1,9 @@
 <?php
 
+include(__DIR__ . '/../configs/database.php');
+$connection = new Connection();
+$model = new RentalCarModel($connection->getConnection());
+
 class RentalCarModel
 {
     private $db;
@@ -90,3 +94,5 @@ class RentalCarModel
         return $this->db->query($query);
     }
 }
+
+?>
