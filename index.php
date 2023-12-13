@@ -1,12 +1,5 @@
-<?php
-
-require_once(__DIR__ . '/core/router/CarRouter.php');
-
-require_once(__DIR__ . '/core/router/userRouter.php');
-?>
 
 
-<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +11,13 @@ require_once(__DIR__ . '/core/router/userRouter.php');
 
     <h1>Seleccione una opción:</h1>
 
-    <a href="cars.php">
+    <a href="./cars.php">
         <button>Ir a CarRouter</button>
     </a>
 
-    <a href="users.php">
+    <a href="./users.php">
         <button>Ir a UserRouter</button>
     </a>
 
 </body>
 </html>
- -->

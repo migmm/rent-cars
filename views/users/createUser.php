@@ -48,7 +48,7 @@
 
         <input type="submit" value="Save">
     </form>
-    <a href="index.php">Back to list</a>
+    <a href="users.php">Back to list</a>
 </body>
 
 </html>

@@ -50,7 +50,7 @@
 
         <input type="submit" value="Actualizar">
     </form>
-    <a href="index.php">Volver al Listado</a>
+    <a href="cars.php">Back to list</a>
 </body>
 
 </html>

@@ -7,7 +7,7 @@
 
 <body>
     <h1>User list</h1>
-    <a href="index.php?action=createUser">Add new User</a>
+    <a href="users.php?action=createUser">Add new User</a>
 
     <table>
         <tr>
@@ -51,8 +51,8 @@
                     <?php endforeach; ?>
                 </td>
                 <td>
-                    <a href="index.php?action=editUser&id=<?php echo $user['id']; ?>">Edit</a>
-                    <a href="index.php?action=deleteUser&id=<?php echo $user['id']; ?>">Delete</a>
+                    <a href="users.php?action=editUser&id=<?php echo $user['id']; ?>">Edit</a>
+                    <a href="users.php?action=deleteUser&id=<?php echo $user['id']; ?>">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

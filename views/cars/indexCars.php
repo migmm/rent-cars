@@ -7,7 +7,7 @@
 
 <body>
     <h1>Rent car list</h1>
-    <a href="index.php?action=createCar">Add new car</a>
+    <a href="cars.php?action=createCar">Add new car</a>
 
     <table>
         <tr>
@@ -46,8 +46,8 @@
                 <td><?php echo $car['image']; ?></td>
 
                 <td>
-                    <a href="index.php?action=editCar&id=<?php echo $car['id']; ?>">Edit</a>
-                    <a href="index.php?action=deleteCar&id=<?php echo $car['id']; ?>">Delete</a>
+                    <a href="cars.php?action=editCar&id=<?php echo $car['id']; ?>">Edit</a>
+                    <a href="cars.php?action=deleteCar&id=<?php echo $car['id']; ?>">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>
