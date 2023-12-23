@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+
+    # RewriteEngine On
+    RewriteEngine On
+
+    # Redirect /cars.php to cars.php
+    RewriteCond %{REQUEST_URI} ^/cars.php$ [NC]
+    RewriteRule ^(.*)$ public/cars.php [QSA,L]
+
+    # Redirect /users.php to users.php
+    RewriteCond %{REQUEST_URI} ^/users.php$ [NC]
+    RewriteRule ^(.*)$ public/users.php [QSA,L]
+
+    # Redirect all non-existing files to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f [NC]
+    RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
+
+</IfModule>

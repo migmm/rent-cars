@@ -21,13 +21,13 @@ class UserController
             $user['paymentMethods'] = $this->model->getPaymentMethodsByUserId($user['id']);
         }
 
-        include 'views/users/indexUsers.php';
+        include '../views/users/indexUsers.php';
     }
 
 
     public function createUser()
     {
-        include 'views/users/createUser.php';
+        include '../views/users/createUser.php';
     }
 
     public function storeUser()
@@ -61,7 +61,7 @@ class UserController
             die("Query Failed.");
         }
 
-        header("Location: index.php");
+        header("Location: ../public/index.php");
     }
 
     public function editUser($userId)
@@ -72,7 +72,7 @@ class UserController
             die("User not found.");
         }
 
-        include 'views/users/editUser.php';
+        include '../views/users/editUser.php';
     }
 
     public function updateUser($userId)
@@ -101,7 +101,7 @@ class UserController
             die("Query Failed.");
         }
 
-        header("Location: index.php");
+        header("Location: ../public/index.php");
     }
 
     public function deleteUser($userId)
@@ -113,7 +113,7 @@ class UserController
             die("Query Failed.");
         }
 
-        header("Location: index.php");
+        header("Location: ../public/index.php");
     }
 }
 

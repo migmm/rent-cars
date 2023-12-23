@@ -15,12 +15,12 @@ class RentalCarController
     public function index()
     {
         $cars = $this->model->getAllCars();
-        include 'views/cars/indexCars.php';
+        include '../views/cars/indexCars.php';
     }
 
     public function createCar()
     {
-        include 'views/cars/createCar.php';
+        include '../views/cars/createCar.php';
     }
 
     public function storeCar()
@@ -45,7 +45,7 @@ class RentalCarController
             die("Query Failed.");
         }
 
-        header("Location: index.php");
+        header("Location: ../public/index.php");
     }
 
     public function editCar($carId)
@@ -56,7 +56,7 @@ class RentalCarController
             die("Query Failed.");
         }
 
-        include 'views/cars/editCar.php';
+        include '../views/cars/editCar.php';
     }
 
     public function updateCar($carId)
@@ -76,7 +76,7 @@ class RentalCarController
             die("Query Failed.");
         }
 
-        header("Location: index.php");
+        header("Location: ../public/index.php");
     }
 
     public function deleteCar($carId)
@@ -87,7 +87,7 @@ class RentalCarController
             die("Query Failed.");
         }
 
-        header("Location: index.php");
+        header("Location: ../public/index.php");
     }
 }
 
