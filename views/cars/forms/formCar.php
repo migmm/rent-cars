@@ -111,7 +111,7 @@ if ($car) {
     if ($result) {
         while ($user = mysqli_fetch_assoc($result)) {
             $selected = ($user['id'] == $car['user_id']) ? "selected" : "";
-            echo "<option value='{$user['id']}'>{$user['first_name']} {$user['last_name']}</option>";
+            echo "<option value='{$user['id']}'$selected>{$user['first_name']} {$user['last_name']}</option>";
         }
     }
 
