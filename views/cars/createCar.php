@@ -1,3 +1,9 @@
+<?php
+
+include('./configs/database.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,7 +34,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM countries";
             $result = $connection->query($query);
 
@@ -47,7 +52,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM cities";
             $result = $connection->query($query);
 
@@ -66,7 +70,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM car_categories";
             $result = $connection->query($query);
 
@@ -91,7 +94,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM users";
             $result = $connection->query($query);
 
@@ -110,7 +112,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM rentals";
             $result = $connection->query($query);
 
