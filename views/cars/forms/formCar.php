@@ -76,7 +76,7 @@ if ($car) {
 </select><br>
 
 <label>Category:</label>
-<select name="category_id" value="<?php echo $category_id; ?>" required>
+<select name="category_id" required>
 
     <?php
 
@@ -85,7 +85,8 @@ if ($car) {
 
     if ($result) {
         while ($category = mysqli_fetch_assoc($result)) {
-            echo "<option value='{$category['id']}'>{$category['name']}</option>";
+            $selected = ($category['id'] == $car['category_id']) ? "selected" : "";
+            echo "<option value='{$category['id']}' $selected>{$category['name']}</option>";
         }
     }
 
@@ -100,7 +101,7 @@ if ($car) {
 <input type="number" step="0.01" name="consumption" value="<?php echo $consumption; ?>" required><br>
 
 <label>Owner</label>
-<select name="user_id" value="<?php echo $user_id; ?>" required>
+<select name="user_id" required>
 
     <?php
 
@@ -109,6 +110,7 @@ if ($car) {
 
     if ($result) {
         while ($user = mysqli_fetch_assoc($result)) {
+            $selected = ($user['id'] == $car['user_id']) ? "selected" : "";
             echo "<option value='{$user['id']}'>{$user['first_name']} {$user['last_name']}</option>";
         }
     }
