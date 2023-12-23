@@ -27,6 +27,15 @@ class UserModel
         return $users;
     }
 
+    public function getUserById($userId)
+    {
+        $userId = $this->db->real_escape_string($userId);
+        $query = "SELECT * FROM users WHERE id = $userId";
+        $result = $this->db->query($query);
+
+        return $result->fetch_assoc();
+    }
+
     public function getRentalsByUserId($userId)
     {
         $userId = $this->db->real_escape_string($userId);

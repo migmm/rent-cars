@@ -29,7 +29,7 @@ class RentalCarModel
     public function getCarById($carId)
     {
         $carId = $this->db->real_escape_string($carId);
-        $query = "SELECT * FROM cars WHERE car_id = $carId";
+        $query = "SELECT * FROM cars WHERE id = $carId";
         $result = $this->db->query($query);
 
         return $result->fetch_assoc();

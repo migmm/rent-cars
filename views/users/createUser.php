@@ -23,8 +23,39 @@
         <label>Password:</label>
         <input type="text" name="password" required><br>
 
-        <label>Location:</label>
-        <input type="text" name="location_id" required><br>
+        <label>Country</label>
+        <select name="country_id" id="countrySelect" required onchange="getCities()">
+
+            <?php
+            include('./configs/database.php');
+            $query = "SELECT * FROM countries";
+            $result = $connection->query($query);
+
+            if ($result) {
+                while ($country = mysqli_fetch_assoc($result)) {
+                    echo "<option value='{$country['id']}'>{$country['name']}</option>";
+                }
+            }
+            ?>
+
+        </select><br>
+
+        <label>City</label>
+        <select name="city_id" id="citySelect" required>
+
+            <?php
+            include('./configs/database.php');
+            $query = "SELECT * FROM cities";
+            $result = $connection->query($query);
+
+            if ($result) {
+                while ($city = mysqli_fetch_assoc($result)) {
+                    echo "<option value='{$city['id']}'>{$city['name']}</option>";
+                }
+            }
+            ?>
+
+        </select><br>
 
         <label>Role:</label>
         <select name="role_id" required>
@@ -49,6 +80,33 @@
         <input type="submit" value="Save">
     </form>
     <a href="users.php">Back to list</a>
+    <script>
+        async function getCities() {
+            var countrySelect = document.getElementById("countrySelect");
+            var citySelect = document.getElementById("citySelect");
+
+            var selectedCountry = countrySelect.value;
+
+            try {
+                var response = await fetch(`utils/getCities.php?country_id=${selectedCountry}`);
+                var cities = await response.json();
+
+                citySelect.innerHTML = "";
+                for (var i = 0; i < cities.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = cities[i].id;
+                    option.text = cities[i].name;
+                    citySelect.add(option);
+                }
+            } catch (error) {
+                console.error("Error al obtener ciudades:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            getCities();
+        });
+    </script>
 </body>
 
 </html>

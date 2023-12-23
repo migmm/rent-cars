@@ -77,7 +77,7 @@
         <label>Air conditioner</label>
         <input type="checkbox" name="air_conditioner" value="1"><br>
 
-        <label>Consumo (L/100km):</label>
+        <label>Consumption (L/100km):</label>
         <input type="number" step="0.01" name="consumption" required><br>
 
         <label>Owner</label>
@@ -114,12 +114,12 @@
 
         </select><br>
 
-        <label>Imagen:</label>
-        <input type="text" name="image" required><br>
+        <label>Image:</label>
+        <input type="file" name="image" required><br>
 
         <input type="submit" value="Guardar">
     </form>
-    <a href="index.php">Back to list</a>
+    <a href="cars.php">Back to list</a>
 
     <script>
         async function getCities() {
