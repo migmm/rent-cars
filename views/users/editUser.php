@@ -11,19 +11,19 @@
     <form action="index.php?action=update&id=<?php echo $user['id']; ?>" method="post">
 
         <label>First name:</label>
-        <input type="text" name="first_name" required><br>
+        <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" required><br>
 
         <label>Last name:</label>
-        <input type="text" name="last_name" required><br>
+        <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" required><br>
 
         <label>Username:</label>
-        <input type="number" name="username" required><br>
+        <input type="text" name="username" value="<?php echo $user['username']; ?>" required><br>
 
         <label>Email:</label>
-        <input type="text" name="email" required><br>
+        <input type="text" name="email" value="<?php echo $user['email']; ?>" required><br>
 
         <label>Password:</label>
-        <input type="text" name="password" required><br>
+        <input type="text" name="password" value="<?php echo $user['password']; ?>" required><br>
 
         <label>Country</label>
         <select name="country_id" id="countrySelect" required onchange="getCities()">
@@ -69,13 +69,14 @@
 
             <?php
 
-            include(__DIR__ . './configs/database.php');
+            include('./configs/database.php');
             $query = "SELECT * FROM roles";
             $result = $connection->query($query);
 
             if ($result) {
                 while ($role = mysqli_fetch_assoc($result)) {
-                    echo "<option value='{$role['role_id']}'>{$role['NAME']}</option>";
+                    $selected = ($role['id'] == $user['role_id']) ? "selected" : "";
+                    echo "<option value='{$role['id']}' $selected>{$role['role_name']}</option>";
                 }
             }
 
