@@ -92,7 +92,6 @@ class UserModel
         $profile_picture = $this->db->real_escape_string($profile_picture);
         $role_id = $this->db->real_escape_string($role_id);
 
-
         $stmt = $this->db->prepare("INSERT INTO users (
         first_name = ?,
         last_name = ?,
@@ -157,3 +156,5 @@ class UserModel
         return $this->db->query($query);
     }
 }
+
+?>

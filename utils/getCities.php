@@ -1,4 +1,5 @@
 <?php
+
 include('../configs/database.php');
 
 if (isset($_GET['country_id'])) {
@@ -15,4 +16,5 @@ if (isset($_GET['country_id'])) {
 } else {
     echo json_encode(array());
 }
+
 ?>

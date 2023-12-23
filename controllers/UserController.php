@@ -1,32 +1,37 @@
 <?php
-require_once (__DIR__. '/../models/UserModel.php');
+
+require_once(__DIR__ . '/../models/UserModel.php');
 $controller = new UserController($model);
 
-class UserController {
+class UserController
+{
     private $model;
 
-    public function __construct($model) {
+    public function __construct($model)
+    {
         $this->model = $model;
     }
 
-    public function index() {
+    public function index()
+    {
         $users = $this->model->getAllUsers();
-    
+
         foreach ($users as &$user) {
             $user['rentals'] = $this->model->getRentalsByUserId($user['id']);
             $user['paymentMethods'] = $this->model->getPaymentMethodsByUserId($user['id']);
         }
-    
+
         include 'views/users/indexUsers.php';
     }
-    
 
 
-    public function createUser() {
+    public function createUser()
+    {
         include 'views/users/createUser.php';
     }
 
-    public function storeUser() {
+    public function storeUser()
+    {
 
         $requiredFields = ['first_name', 'last_name', 'username', 'email', 'password', 'role_id'];
         foreach ($requiredFields as $field) {
@@ -52,24 +57,26 @@ class UserController {
 
         $result = $this->model->createUser($first_name, $last_name, $username, $email, $city_id, $password, $country_id, $profile_picture, $role_id);
 
-        if(!$result) {
+        if (!$result) {
             die("Query Failed.");
         }
-        
+
         header("Location: index.php");
     }
 
-    public function editUser($userId) {
+    public function editUser($userId)
+    {
         $user = $this->model->getUserById($userId);
 
-        if(!$user) {
+        if (!$user) {
             die("User not found.");
         }
 
         include 'views/users/editUser.php';
     }
 
-    public function updateUser($userId) {
+    public function updateUser($userId)
+    {
 
         $requiredFields = ['first_name', 'last_name', 'username', 'email', 'password', 'role_id'];
         foreach ($requiredFields as $field) {
@@ -90,22 +97,24 @@ class UserController {
 
         $result = $this->model->updateUser($userId, $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $profile_picture, $role_id);
 
-        if(!$result) {
+        if (!$result) {
             die("Query Failed.");
         }
 
         header("Location: index.php");
     }
 
-    public function deleteUser($userId) {
+    public function deleteUser($userId)
+    {
 
         $result = $this->model->deleteUser($userId);
 
-        if(!$result) {
+        if (!$result) {
             die("Query Failed.");
         }
 
         header("Location: index.php");
     }
 }
+
 ?>

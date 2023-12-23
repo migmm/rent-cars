@@ -27,6 +27,7 @@
         <select name="country_id" id="countrySelect" required onchange="getCities()">
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM countries";
             $result = $connection->query($query);
@@ -36,6 +37,7 @@
                     echo "<option value='{$country['id']}'>{$country['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -44,6 +46,7 @@
         <select name="city_id" id="citySelect" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM cities";
             $result = $connection->query($query);
@@ -53,6 +56,7 @@
                     echo "<option value='{$city['id']}'>{$city['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -61,6 +65,7 @@
         <select name="category_id" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM car_categories";
             $result = $connection->query($query);
@@ -70,6 +75,7 @@
                     echo "<option value='{$category['id']}'>{$category['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -84,6 +90,7 @@
         <select name="user_id" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM users";
             $result = $connection->query($query);
@@ -93,6 +100,7 @@
                     echo "<option value='{$user['id']}'>{$user['first_name']} {$user['last_name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -101,6 +109,7 @@
         <select name="rental_id" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM rentals";
             $result = $connection->query($query);
@@ -110,6 +119,7 @@
                     echo "<option value='{$rental['id']}'>{$rental['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -122,6 +132,7 @@
     <a href="cars.php">Back to list</a>
 
     <script>
+
         async function getCities() {
             var countrySelect = document.getElementById("countrySelect");
             var citySelect = document.getElementById("citySelect");
@@ -144,13 +155,11 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             getCities();
         });
+
     </script>
-
-
-
 </body>
 
 </html>

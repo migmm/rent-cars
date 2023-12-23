@@ -9,7 +9,7 @@
     <h1>Edit User</h1>
 
     <form action="index.php?action=update&id=<?php echo $user['id']; ?>" method="post">
-        
+
         <label>First name:</label>
         <input type="text" name="first_name" required><br>
 
@@ -27,7 +27,9 @@
 
         <label>Country</label>
         <select name="country_id" id="countrySelect" required onchange="getCities()">
+
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM countries";
             $result = $connection->query($query);
@@ -38,13 +40,16 @@
                     echo "<option value='{$country['id']}' $selected>{$country['name']}</option>";
                 }
             }
+
             ?>
+
         </select><br>
 
         <label>City</label>
         <select name="city_id" id="citySelect" value="<?php echo $user['city_id']; ?>" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM cities";
             $result = $connection->query($query);
@@ -54,6 +59,7 @@
                     echo "<option value='{$city['id']}'>{$city['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -62,7 +68,8 @@
         <select name="role_id" required>
 
             <?php
-            include(__DIR__. './configs/database.php');
+
+            include(__DIR__ . './configs/database.php');
             $query = "SELECT * FROM roles";
             $result = $connection->query($query);
 
@@ -71,6 +78,7 @@
                     echo "<option value='{$role['role_id']}'>{$role['NAME']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -82,6 +90,7 @@
     </form>
     <a href="index.php">Back to list</a>
     <script>
+
         async function getCities() {
             var countrySelect = document.getElementById("countrySelect");
             var citySelect = document.getElementById("citySelect");
@@ -107,6 +116,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             getCities();
         });
+
     </script>
 </body>
 

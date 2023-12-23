@@ -8,7 +8,7 @@
 <body>
     <h1>Edit car</h1>
     <form action="cars.php?action=update&id=<?php echo $car['id']; ?>">
-        
+
         <label>Brand:</label>
         <input type="text" name="brand" value="<?php echo $car['brand']; ?>" required><br>
 
@@ -26,7 +26,9 @@
 
         <label>Country</label>
         <select name="country_id" id="countrySelect" required onchange="getCities()">
+
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM countries";
             $result = $connection->query($query);
@@ -37,13 +39,16 @@
                     echo "<option value='{$country['id']}' $selected>{$country['name']}</option>";
                 }
             }
+
             ?>
+
         </select><br>
 
         <label>City</label>
         <select name="city_id" id="citySelect" value="<?php echo $car['city_id']; ?>" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM cities";
             $result = $connection->query($query);
@@ -53,6 +58,7 @@
                     echo "<option value='{$city['id']}'>{$city['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -61,6 +67,7 @@
         <select name="category_id" value="<?php echo $car['category_id']; ?>" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM car_categories";
             $result = $connection->query($query);
@@ -70,6 +77,7 @@
                     echo "<option value='{$category['id']}'>{$category['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -84,6 +92,7 @@
         <select name="user_id" value="<?php echo $car['user_id']; ?>" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM users";
             $result = $connection->query($query);
@@ -93,14 +102,16 @@
                     echo "<option value='{$user['id']}'>{$user['first_name']} {$user['last_name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
 
-      <!--   <label>Rental status</label>
+        <!--   <label>Rental status</label>
         <label name="rental_id">
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM rentals";
             $query = "SELECT * FROM rentals WHERE id";
@@ -111,6 +122,7 @@
                     echo "<option value='{$rental['id']}'>{$rental['name']}</option>";
                 }
             }
+
             ?>
 
         </label><br> -->
@@ -123,6 +135,7 @@
     <a href="cars.php">Back to list</a>
 
     <script>
+
         async function getCities() {
             var countrySelect = document.getElementById("countrySelect");
             var citySelect = document.getElementById("citySelect");
@@ -148,6 +161,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             getCities();
         });
+
     </script>
 </body>
 

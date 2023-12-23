@@ -27,6 +27,7 @@
         <select name="country_id" id="countrySelect" required onchange="getCities()">
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM countries";
             $result = $connection->query($query);
@@ -36,6 +37,7 @@
                     echo "<option value='{$country['id']}'>{$country['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -44,6 +46,7 @@
         <select name="city_id" id="citySelect" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM cities";
             $result = $connection->query($query);
@@ -53,6 +56,7 @@
                     echo "<option value='{$city['id']}'>{$city['name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -61,6 +65,7 @@
         <select name="role_id" required>
 
             <?php
+
             include('./configs/database.php');
             $query = "SELECT * FROM roles";
             $result = $connection->query($query);
@@ -70,6 +75,7 @@
                     echo "<option value='{$role['id']}'>{$role['role_name']}</option>";
                 }
             }
+
             ?>
 
         </select><br>
@@ -81,6 +87,7 @@
     </form>
     <a href="users.php">Back to list</a>
     <script>
+
         async function getCities() {
             var countrySelect = document.getElementById("countrySelect");
             var citySelect = document.getElementById("citySelect");
@@ -106,6 +113,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             getCities();
         });
+
     </script>
 </body>
 

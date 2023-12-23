@@ -36,12 +36,12 @@ class RentalCarModel
     }
 
     public function createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image)
-{
-    $brand = $this->db->real_escape_string($brand);
-    $transmission = $this->db->real_escape_string($transmission);
-    $image = $this->db->real_escape_string($image);
+    {
+        $brand = $this->db->real_escape_string($brand);
+        $transmission = $this->db->real_escape_string($transmission);
+        $image = $this->db->real_escape_string($image);
 
-    $query = "INSERT INTO cars (
+        $query = "INSERT INTO cars (
         name, 
         brand, 
         year, 
@@ -60,12 +60,11 @@ class RentalCarModel
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
     )";
 
-    $stmt = $this->db->prepare($query);
-    $stmt->bind_param('ssisiiiiidiis', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image);
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssisiiiiidiis', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image);
 
-    return $stmt->execute();
-}
-
+        return $stmt->execute();
+    }
 
     public function updateCar($carId, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image)
     {
@@ -95,8 +94,6 @@ class RentalCarModel
 
         return $stmt->execute();
     }
-
-
     public function deleteCar($carId)
     {
         $carId = $this->db->real_escape_string($carId);
@@ -105,3 +102,5 @@ class RentalCarModel
         return $this->db->query($query);
     }
 }
+
+?>
