@@ -16,11 +16,11 @@ $car = null;
     <h1>Add new car</h1>
     <form action="indexCars.php?action=store" method="post">
 
-    <?php  
+        <?php
 
-    include('forms/formCar.php');
+        include('forms/formCar.php');
 
-    ?>
+        ?>
 
     </form>
     <a href="cars.php">Back to list</a>

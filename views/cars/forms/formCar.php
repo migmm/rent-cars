@@ -1,16 +1,14 @@
 <?php
 
-
 $brand = '';
-    $name = '';
-    $year = '';
-    $transmission = '';
-    $passengers = '';
-    $air_conditioner = '';
-    $consumption = '';
-    $user_id = '';
-    $image = '';
-
+$name = '';
+$year = '';
+$transmission = '';
+$passengers = '';
+$air_conditioner = '';
+$consumption = '';
+$user_id = '';
+$image = '';
 
 if ($car) {
     $brand = $car['brand'];
@@ -22,7 +20,7 @@ if ($car) {
     $consumption = $car['consumption'];
     $user_id = $car['user_id'];
     $image = $car['image'];
-} 
+}
 
 ?>
 <label>Brand:</label>
@@ -122,9 +120,9 @@ if ($car) {
   <label>Rental status</label>
         <label name="rental_id">
  -->
-            <?php
+<?php
 
-      /*       $query = "SELECT * FROM rentals";
+/*       $query = "SELECT * FROM rentals";
             $query = "SELECT * FROM rentals WHERE id";
             $result = $connection->query($query);
 
@@ -134,7 +132,7 @@ if ($car) {
                 }
             } */
 
-            ?>
+?>
 <!-- 
         </label><br> -->
 

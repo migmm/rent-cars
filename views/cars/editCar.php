@@ -15,11 +15,11 @@ include('../configs/database.php');
     <h1>Edit car</h1>
     <form action="cars.php?action=update&id=<?php echo $car['id']; ?>">
 
-    <?php  
+        <?php
 
-    include('forms/formCar.php');
+        include('forms/formCar.php');
 
-    ?>
+        ?>
 
     </form>
     <a href="cars.php">Back to list</a>
