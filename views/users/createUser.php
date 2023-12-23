@@ -1,3 +1,9 @@
+<?php
+
+include('./configs/database.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,7 +34,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM countries";
             $result = $connection->query($query);
 
@@ -47,7 +52,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM cities";
             $result = $connection->query($query);
 
@@ -66,7 +70,6 @@
 
             <?php
 
-            include('./configs/database.php');
             $query = "SELECT * FROM roles";
             $result = $connection->query($query);
 
