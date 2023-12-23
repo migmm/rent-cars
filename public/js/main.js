@@ -1,4 +1,3 @@
-console.log("dsdsds")
 async function getCities() {
     var countrySelect = document.getElementById("countrySelect");
     var citySelect = document.getElementById("citySelect");
