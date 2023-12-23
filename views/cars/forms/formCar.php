@@ -48,7 +48,7 @@ if ($car) {
 
     if ($result) {
         while ($country = mysqli_fetch_assoc($result)) {
-            $selected = ($country['id'] == $country_id) ? "selected" : "";
+            $selected = ($country['id'] == $car['country_id']) ? "selected" : "";
             echo "<option value='{$country['id']}' $selected>{$country['name']}</option>";
         }
     }
@@ -58,7 +58,7 @@ if ($car) {
 </select><br>
 
 <label>City</label>
-<select name="city_id" id="citySelect" value="<?php echo $city_id; ?>" required>
+<select name="city_id" id="citySelect" required>
 
     <?php
 
