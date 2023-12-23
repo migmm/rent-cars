@@ -151,7 +151,7 @@ class UserModel
     public function deleteUser($userId)
     {
         $userId = $this->db->real_escape_string($userId);
-        $query = "DELETE FROM users WHERE user_id = $userId";
+        $query = "DELETE FROM users WHERE id = $userId";
 
         return $this->db->query($query);
     }
