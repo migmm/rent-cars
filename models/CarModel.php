@@ -97,7 +97,7 @@ class RentalCarModel
     public function deleteCar($carId)
     {
         $carId = $this->db->real_escape_string($carId);
-        $query = "DELETE FROM cars WHERE car_id = $carId";
+        $query = "DELETE FROM cars WHERE id = $carId";
 
         return $this->db->query($query);
     }
