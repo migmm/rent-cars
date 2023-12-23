@@ -11,6 +11,10 @@
     RewriteCond %{REQUEST_URI} ^/users.php$ [NC]
     RewriteRule ^(.*)$ public/users.php [QSA,L]
 
+    # Allow to use main.js file
+    RewriteCond %{REQUEST_URI} ^/js/main.js$ [NC]
+    RewriteRule ^(.*)$ public/js/main.js [QSA,L]
+
     # Redirect all non-existing files to index.php
     RewriteCond %{REQUEST_FILENAME} !-f [NC]
     RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
