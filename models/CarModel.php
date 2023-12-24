@@ -74,31 +74,26 @@ class RentalCarModel
         return $stmt->execute();
     }
 
-    public function updateCar($carId, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image)
+    public function updateCar($id, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image)
     {
-        $carId = $this->db->real_escape_string($carId);
-        $brand = $this->db->real_escape_string($brand);
-        $transmission = $this->db->real_escape_string($transmission);
-        $image = $this->db->real_escape_string($image);
-
         $query = "UPDATE cars SET 
-        name = ?, 
-        brand = ?, 
-        year = ?, 
-        transmission = ?, 
-        passengers = ?, 
-        city_id = ?, 
-        country_id = ?, 
-        rental_id = ?, 
-        category_id = ?, 
-        air_conditioner = ?, 
-        consumption = ?, 
-        user_id = ?, 
-        image = ?
-        WHERE car_id = ?";
+                    name = ?, 
+                    brand = ?, 
+                    year = ?, 
+                    transmission = ?, 
+                    passengers = ?, 
+                    city_id = ?, 
+                    country_id = ?, 
+                    rental_id = ?, 
+                    category_id = ?, 
+                    air_conditioner = ?, 
+                    consumption = ?, 
+                    user_id = ?, 
+                    image = ?
+                    WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssissiiiiidisi', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $carId);
+        $stmt->bind_param('ssisiiiiidiisi', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $id);
 
         return $stmt->execute();
     }

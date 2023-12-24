@@ -80,7 +80,7 @@ class UserModel
 
         return $paymentMethods;
     }
-    public function createUser($first_name, $last_name, $username, $email, $city_id, $country_id, $password, $profile_picture, $role_id)
+    public function createUser($first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture)
     {
         $query = "INSERT INTO users (
             first_name,
@@ -88,10 +88,10 @@ class UserModel
             username,
             email,
             city_id,
-            password,
             country_id,
-            profile_picture,
-            role_id
+            password,
+            role_id,
+            profile_picture
         ) 
         VALUES (
             ?,
@@ -106,12 +106,12 @@ class UserModel
         )";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssssisisi", $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $profile_picture, $role_id);
+        $stmt->bind_param("ssssiisis", $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture);
 
         return $stmt->execute();
     }
 
-    public function updateUser($id, $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $profile_picture, $role_id)
+    public function updateUser($id, $first_name, $last_name, $username, $email, $city_id, $country_id, $password,  $role_id, $profile_picture)
     {
         $query = "UPDATE users SET 
                     first_name = ?,
@@ -121,13 +121,13 @@ class UserModel
                     city_id = ?,
                     country_id = ?,
                     password = ?,
-                    profile_picture = ?,
-                    role_id = ?
+                    role_id = ?,
+                    profile_picture = ?
                     WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
 
-        $stmt->bind_param("ssssisisii", $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $profile_picture, $role_id, $id);
+        $stmt->bind_param("issssisiis", $id, $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $role_id, $profile_picture);
 
         $result = $stmt->execute();
 

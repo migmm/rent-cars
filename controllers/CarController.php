@@ -53,11 +53,13 @@ class RentalCarController
 
         $result = $this->model->createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $user_id, $air_conditioner, $consumption, $image);
 
+        echo $result;
+
         if (!$result) {
             die("Query Failed.");
         }
 
-        header("Location: ../public/index.php");
+        /* header("Location: ../public/index.php"); */
     }
 
     public function editCar($carId)
@@ -73,22 +75,41 @@ class RentalCarController
 
     public function updateCar($carId)
     {
+        $requiredFields = ['name', 'brand', 'year', 'transmission', 'passengers', 'city_id', 'country_id', 'category_id', 'consumption', 'image',];
+        foreach ($requiredFields as $field) {
+            if (empty($_POST[$field])) {
+                die("Error: $field is required.");
+            }
+        }
+
+        $name = $_POST['name'];
         $brand = $_POST['brand'];
-        $passengers = (int)$_POST['passengers'];
+        $year = (int)$_POST['year'];
         $transmission = $_POST['transmission'];
-        $suitcases = (int)$_POST['suitcases'];
+        $passengers = (int)$_POST['passengers'];
+        $city_id = (int)$_POST['city_id'];
+        $country_id = (int)$_POST['country_id'];
+        $rental_id = (int)$_POST['rental_id'];
         $category_id = (int)$_POST['category_id'];
+        $user_id = $_POST['user_id'];
         $air_conditioner = isset($_POST['air_conditioner']) ? 1 : 0;
         $consumption = (float)$_POST['consumption'];
         $image = $_POST['image'];
 
-        $result = $this->model->updateCar($carId, $brand, $passengers, $transmission, $suitcases, $category_id, $air_conditioner, $consumption, $image);
+        echo "<pre>";
+        echo "POST Data:\n";
+        var_dump($_POST);
+        echo "</pre>";
+
+        $result = $this->model->updateCar($carId, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $user_id, $air_conditioner, $consumption, $image);
+
+        echo $result;
 
         if (!$result) {
             die("Query Failed.");
         }
 
-        header("Location: ../public/index.php");
+       /*  header("Location: ../public/index.php"); */
     }
 
     public function deleteCar($carId)
@@ -99,6 +120,6 @@ class RentalCarController
             die("Query Failed.");
         }
 
-        header("Location: ../public/index.php");
+       /*  header("Location: ../public/index.php"); */
     }
 }

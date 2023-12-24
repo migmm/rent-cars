@@ -42,24 +42,26 @@ class UserController
         $last_name = $_POST['last_name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $country_id = $_POST['$country_id'];
-        $city_id = $_POST['$city_id'];
+        $city_id = (int)$_POST['city_id'];
+        $country_id = (int)$_POST['country_id'];
         $password = $_POST['password'];
+        $role_id = (int)$_POST['role_id'];
         $profile_picture = $_POST['profile_picture'];
-        $role_id = $_POST['role_id'];
 
         echo "<pre>";
         echo "POST Data:\n";
         var_dump($_POST);
         echo "</pre>";
 
-        $result = $this->model->createUser($first_name, $last_name, $username, $email, $city_id, $country_id, $password, $profile_picture, $role_id);
+        $result = $this->model->createUser($first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture);
+
+        echo $result;
 
         if (!$result) {
             die("Query Failed.");
         }
 
-        header("Location: ../public/index.php");
+       /*  header("Location: ../public/index.php"); */
     }
 
     public function editUser($userId)
@@ -89,21 +91,23 @@ class UserController
         $city_id = $_POST['$city_id'];
         $country_id = $_POST['$country_id'];
         $password = $_POST['password'];
-        $profile_picture = $_POST['profile_picture'];
         $role_id = $_POST['role_id'];
+        $profile_picture = $_POST['profile_picture'];
 
         echo "<pre>";
         echo "POST Data:\n";
         var_dump($_POST);
         echo "</pre>";
 
-        $result = $this->model->updateUser($userId, $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $profile_picture, $role_id);
+        $result = $this->model->updateUser($userId, $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture);
+
+        echo $result;
 
         if (!$result) {
             die("Query Failed.");
         }
 
-        header("Location: ../public/index.php");
+      /*   header("Location: ../public/index.php"); */
     }
 
     public function deleteUser($userId)
@@ -115,6 +119,6 @@ class UserController
             die("Query Failed.");
         }
 
-        header("Location: ../public/index.php");
+       /*  header("Location: ../public/index.php"); */
     }
 }

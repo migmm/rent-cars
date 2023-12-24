@@ -16,7 +16,7 @@
     RewriteRule ^(.*)$ public/js/main.js [QSA,L]
 
     # Redirect all non-existing files to index.php
-    RewriteCond %{REQUEST_FILENAME} !-f [NC]
+     RewriteCond %{REQUEST_URI} ^/$ [NC]
     RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
 
 </IfModule>

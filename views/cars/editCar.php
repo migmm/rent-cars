@@ -13,7 +13,8 @@ include('../configs/database.php');
 
 <body>
     <h1>Edit car</h1>
-    <form action="cars.php?action=update&id=<?php echo $car['id']; ?>">
+
+    <form action="cars.php?action=updateCar&id=<?php echo $car['id']; ?>">
 
         <?php
 

@@ -40,6 +40,24 @@ if ($car) {
 <label>Passengers:</label>
 <input type="number" name="passengers" value="<?php echo $passengers; ?>" required><br>
 
+<label>City</label>
+<select name="city_id" id="citySelect" required>
+
+    <?php
+
+    $query = "SELECT * FROM cities";
+    $result = $connection->query($query);
+
+    if ($result) {
+        while ($city = mysqli_fetch_assoc($result)) {
+            echo "<option value='{$city['id']}'>{$city['name']}</option>";
+        }
+    }
+
+    ?>
+
+</select><br>
+
 <label>Country</label>
 <select name="country_id" id="countrySelect" required onchange="getCities()">
 
@@ -52,24 +70,6 @@ if ($car) {
         while ($country = mysqli_fetch_assoc($result)) {
             $selected = ($country['id'] == $car['country_id']) ? "selected" : "";
             echo "<option value='{$country['id']}' $selected>{$country['name']}</option>";
-        }
-    }
-
-    ?>
-
-</select><br>
-
-<label>City</label>
-<select name="city_id" id="citySelect" required>
-
-    <?php
-
-    $query = "SELECT * FROM cities";
-    $result = $connection->query($query);
-
-    if ($result) {
-        while ($city = mysqli_fetch_assoc($result)) {
-            echo "<option value='{$city['id']}'>{$city['name']}</option>";
         }
     }
 
