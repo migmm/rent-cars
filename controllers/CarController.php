@@ -120,6 +120,6 @@ class RentalCarController
             die("Query Failed.");
         }
 
-       /*  header("Location: ../public/index.php"); */
+        header("Location: cars.php");
     }
 }
