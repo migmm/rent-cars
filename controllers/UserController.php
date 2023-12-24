@@ -127,6 +127,6 @@ class UserController
             die("Query Failed.");
         }
 
-        /*  header("Location: ../public/index.php"); */
+        header("Location: users.php");
     }
 }
