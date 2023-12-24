@@ -25,21 +25,33 @@ class RentalCarController
 
     public function storeCar()
     {
+        $requiredFields = ['name', 'brand', 'year', 'transmission', 'passengers', 'city_id', 'country_id', 'category_id', 'consumption', 'image',];
+        foreach ($requiredFields as $field) {
+            if (empty($_POST[$field])) {
+                die("Error: $field is required.");
+            }
+        }
 
         $name = $_POST['name'];
         $brand = $_POST['brand'];
         $year = (int)$_POST['year'];
         $transmission = $_POST['transmission'];
         $passengers = (int)$_POST['passengers'];
-        $city_id = (int)$_POST['city_id '];
+        $city_id = (int)$_POST['city_id'];
         $country_id = (int)$_POST['country_id'];
         $rental_id = (int)$_POST['rental_id'];
         $category_id = (int)$_POST['category_id'];
+        $user_id = $_POST['user_id'];
         $air_conditioner = isset($_POST['air_conditioner']) ? 1 : 0;
         $consumption = (float)$_POST['consumption'];
         $image = $_POST['image'];
 
-        $result = $this->model->createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $image);
+        echo "<pre>";
+        echo "POST Data:\n";
+        var_dump($_POST);
+        echo "</pre>";
+
+        $result = $this->model->createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $user_id, $air_conditioner, $consumption, $image);
 
         if (!$result) {
             die("Query Failed.");
@@ -90,5 +102,3 @@ class RentalCarController
         header("Location: ../public/index.php");
     }
 }
-
-?>

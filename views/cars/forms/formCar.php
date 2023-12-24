@@ -9,6 +9,7 @@ $air_conditioner = '';
 $consumption = '';
 $user_id = '';
 $image = '';
+$rental_id = '';
 
 if ($car) {
     $brand = $car['brand'];
@@ -19,6 +20,7 @@ if ($car) {
     $air_conditioner = $car['air_conditioner'];
     $consumption = $car['consumption'];
     $user_id = $car['user_id'];
+    $rental_id = $car['rental_id'];
     $image = $car['image'];
 }
 
@@ -118,6 +120,11 @@ if ($car) {
     ?>
 
 </select><br>
+
+<label>Rental ID:</label>
+<input type="number" name="rental_id" value="<?php echo $rental_id; ?>" required><br>
+
+
 <!-- 
   <label>Rental status</label>
         <label name="rental_id">
@@ -139,6 +146,6 @@ if ($car) {
         </label><br> -->
 
 <label>Image:</label>
-<input type="file" name="image" value="<?php echo $image; ?>" required><br>
+<input type="text" name="image" value="<?php echo $image; ?>" required><br>
 
 <input type="submit" value="Save">

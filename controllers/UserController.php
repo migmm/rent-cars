@@ -24,7 +24,6 @@ class UserController
         include '../views/users/indexUsers.php';
     }
 
-
     public function createUser()
     {
         include '../views/users/createUser.php';
@@ -76,7 +75,6 @@ class UserController
 
     public function updateUser($userId)
     {
-
         $requiredFields = ['first_name', 'last_name', 'username', 'email', 'password', 'role_id', 'city_id', 'country_id'];
         foreach ($requiredFields as $field) {
             if (empty($_POST[$field])) {

@@ -37,27 +37,35 @@ class RentalCarModel
 
     public function createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image)
     {
-        $brand = $this->db->real_escape_string($brand);
-        $transmission = $this->db->real_escape_string($transmission);
-        $image = $this->db->real_escape_string($image);
-
         $query = "INSERT INTO cars (
-        name, 
-        brand, 
-        year, 
-        transmission, 
-        passengers, 
-        city_id, 
-        country_id, 
-        rental_id, 
-        category_id, 
-        air_conditioner, 
-        consumption, 
-        user_id, 
-        image
+            name, 
+            brand, 
+            year, 
+            transmission, 
+            passengers, 
+            city_id, 
+            country_id, 
+            rental_id,
+            category_id,
+            air_conditioner, 
+            consumption, 
+            user_id, 
+            image
     ) 
     VALUES (
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?, 
+        ?
     )";
 
         $stmt = $this->db->prepare($query);
@@ -102,5 +110,3 @@ class RentalCarModel
         return $this->db->query($query);
     }
 }
-
-?>
