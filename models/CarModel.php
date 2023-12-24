@@ -74,7 +74,7 @@ class RentalCarModel
         return $stmt->execute();
     }
 
-    public function updateCar($id, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image)
+    public function updateCar($id, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $rental_id)
     {
         $query = "UPDATE cars SET 
                     name = ?, 
@@ -84,16 +84,16 @@ class RentalCarModel
                     passengers = ?, 
                     city_id = ?, 
                     country_id = ?, 
-                    rental_id = ?, 
-                    category_id = ?, 
+                    category_id = ?,
                     air_conditioner = ?, 
                     consumption = ?, 
                     user_id = ?, 
-                    image = ?
+                    image = ?,
+                    rental_id = ?
                     WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssisiiiiidiisi', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $id);
+        $stmt->bind_param('ssisiiiiidisii', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $rental_id, $id);
 
         return $stmt->execute();
     }

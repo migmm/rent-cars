@@ -8,14 +8,14 @@ include('../configs/database.php');
 <html>
 
 <head>
-    <title>Edit car</title>
+    <title>Edit Car</title>
 </head>
 
 <body>
-    <h1>Edit car</h1>
+    <h1>Edit Car</h1>
 
-    <form action="cars.php?action=updateCar&id=<?php echo $car['id']; ?>">
-
+    <form action="cars.php?action=updateCar&id=<?php echo $car['id']; ?>" method="post">
+    
         <?php
 
         include('forms/formCar.php');
@@ -23,7 +23,7 @@ include('../configs/database.php');
         ?>
 
     </form>
-    <a href="cars.php">Back to list</a>
+    <a href="index.php">Back to list</a>
 
     <script src="js/main.js"></script>
 </body>

@@ -100,8 +100,8 @@ class RentalCarController
         echo "POST Data:\n";
         var_dump($_POST);
         echo "</pre>";
-
-        $result = $this->model->updateCar($carId, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $user_id, $air_conditioner, $consumption, $image);
+        
+        $result = $this->model->updateCar($carId, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $rental_id);
 
         echo $result;
 
