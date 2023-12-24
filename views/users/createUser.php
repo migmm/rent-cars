@@ -14,7 +14,7 @@ $user = null;
 
 <body>
     <h1>New user</h1>
-    <form action="index.php?action=store" method="post">
+    <form action="users.php?action=storeUser" method="post">
 
         <?php
 

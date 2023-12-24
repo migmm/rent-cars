@@ -82,35 +82,33 @@ class UserModel
     }
     public function createUser($first_name, $last_name, $username, $email, $city_id, $country_id, $password, $profile_picture, $role_id)
     {
-        $first_name = $this->db->real_escape_string($first_name);
-        $last_name = $this->db->real_escape_string($last_name);
-        $username = $this->db->real_escape_string($username);
-        $email = $this->db->real_escape_string($email);
-        $city_id = $this->db->real_escape_string($city_id);
-        $country_id = $this->db->real_escape_string($country_id);
-        $password = $this->db->real_escape_string($password);
-        $profile_picture = $this->db->real_escape_string($profile_picture);
-        $role_id = $this->db->real_escape_string($role_id);
+        $query = "INSERT INTO users (
+            first_name,
+            last_name,
+            username,
+            email,
+            city_id,
+            password,
+            country_id,
+            profile_picture,
+            role_id
+        ) 
+        VALUES (
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+        )";
 
-        $stmt = $this->db->prepare("INSERT INTO users (
-        first_name = ?,
-        last_name = ?,
-        username = ?,
-        email = ?,
-        city_id = ?,
-        country_id = ?,
-        password = ?,
-        profile_picture = ?,
-        role_id = ?,
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssssisisi', $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $profile_picture, $role_id);
 
-        $stmt->bind_param("ssssiissi", $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $profile_picture, $role_id);
-
-        $result = $stmt->execute();
-
-        $stmt->close();
-
-        return $result;
+        return $stmt->execute();
     }
 
     public function updateUser($user_id, $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $profile_picture, $role_id)
