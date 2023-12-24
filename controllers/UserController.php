@@ -48,6 +48,10 @@ class UserController
         $role_id = (int)$_POST['role_id'];
         $profile_picture = $_POST['profile_picture'];
 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            die("Error: Invalid email format.");
+        } 
+
         echo "<pre>";
         echo "POST Data:\n";
         var_dump($_POST);
@@ -93,6 +97,10 @@ class UserController
         $password = $_POST['password'];
         $role_id = (int)$_POST['role_id'];
         $profile_picture = $_POST['profile_picture'];
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            die("Error: Invalid email format.");
+        } 
 
         echo "<pre>";
         echo "POST Data:\n";
