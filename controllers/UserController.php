@@ -32,7 +32,7 @@ class UserController
 
     public function storeUser()
     {
-        $requiredFields = ['first_name', 'last_name', 'username', 'email', 'password', 'role_id','city_id', 'country_id'];
+        $requiredFields = ['first_name', 'last_name', 'username', 'email', 'password', 'role_id', 'city_id', 'country_id'];
         foreach ($requiredFields as $field) {
             if (empty($_POST[$field])) {
                 die("Error: $field is required.");
@@ -77,7 +77,7 @@ class UserController
     public function updateUser($userId)
     {
 
-        $requiredFields = ['first_name', 'last_name', 'username', 'email', 'password', 'role_id'];
+        $requiredFields = ['first_name', 'last_name', 'username', 'email', 'password', 'role_id', 'city_id', 'country_id'];
         foreach ($requiredFields as $field) {
             if (empty($_POST[$field])) {
                 die("Error: $field is required.");
@@ -89,10 +89,15 @@ class UserController
         $username = $_POST['username'];
         $email = $_POST['email'];
         $city_id = $_POST['$city_id'];
-        $country_id = $_POST['$city_id'];
+        $country_id = $_POST['$country_id'];
         $password = $_POST['password'];
         $profile_picture = $_POST['profile_picture'];
         $role_id = $_POST['role_id'];
+
+        echo "<pre>";
+        echo "POST Data:\n";
+        var_dump($_POST);
+        echo "</pre>";
 
         $result = $this->model->updateUser($userId, $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $profile_picture, $role_id);
 
@@ -115,5 +120,3 @@ class UserController
         header("Location: ../public/index.php");
     }
 }
-
-?>
