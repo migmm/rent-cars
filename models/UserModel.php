@@ -106,12 +106,13 @@ class UserModel
         )";
 
         $stmt = $this->db->prepare($query);
+
         $stmt->bind_param("ssssiisis", $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture);
 
         return $stmt->execute();
     }
 
-    public function updateUser($id, $first_name, $last_name, $username, $email, $city_id, $country_id, $password,  $role_id, $profile_picture)
+    public function updateUser($id, $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture)
     {
         $query = "UPDATE users SET 
                     first_name = ?,
@@ -127,7 +128,7 @@ class UserModel
 
         $stmt = $this->db->prepare($query);
 
-        $stmt->bind_param("issssisiis", $id, $first_name, $last_name, $username, $email, $city_id, $password, $country_id, $role_id, $profile_picture);
+        $stmt->bind_param("ssssiisisi", $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture, $id);
 
         $result = $stmt->execute();
 

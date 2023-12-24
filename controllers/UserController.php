@@ -61,7 +61,7 @@ class UserController
             die("Query Failed.");
         }
 
-       /*  header("Location: ../public/index.php"); */
+        /*  header("Location: ../public/index.php"); */
     }
 
     public function editUser($userId)
@@ -88,10 +88,10 @@ class UserController
         $last_name = $_POST['last_name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $city_id = $_POST['$city_id'];
-        $country_id = $_POST['$country_id'];
+        $city_id = (int)$_POST['city_id'];
+        $country_id = (int)$_POST['country_id'];
         $password = $_POST['password'];
-        $role_id = $_POST['role_id'];
+        $role_id = (int)$_POST['role_id'];
         $profile_picture = $_POST['profile_picture'];
 
         echo "<pre>";
@@ -107,7 +107,7 @@ class UserController
             die("Query Failed.");
         }
 
-      /*   header("Location: ../public/index.php"); */
+        /*   header("Location: ../public/index.php"); */
     }
 
     public function deleteUser($userId)
@@ -119,6 +119,6 @@ class UserController
             die("Query Failed.");
         }
 
-       /*  header("Location: ../public/index.php"); */
+        /*  header("Location: ../public/index.php"); */
     }
 }
