@@ -1,4 +1,5 @@
 <?php
+
 class Router
 {
     private $routes = [];
@@ -8,11 +9,11 @@ class Router
         $this->controller = $controller;
     }
 
-    public function addRoute($action, $controller, $method)
+    public function addRoute($action, $method, $middleware = null)
     {
         $this->routes[$action] = [
-            'controller' => $controller,
             'method' => $method,
+            'middleware' => $middleware,
         ];
     }
 
@@ -23,17 +24,26 @@ class Router
 
         if (array_key_exists($action, $this->routes)) {
             $route = $this->routes[$action];
-            $controller = $route['controller'];
             $method = $route['method'];
+            $middleware = $route['middleware'];
 
-            if ($id) {
-                $controller->$method($id);
+            if ($middleware) {
+                $middleware->handle($action);
+            }
+
+            if (method_exists($this->controller, $method)) {
+                if ($id) {
+                    $this->controller->$method($id);
+                } else {
+                    $this->controller->$method();
+                }
             } else {
-                $controller->$method();
+                //$controller->$method();
+                echo "Error: Method does not exist in controller.";
             }
         } else {
-            
-            $this->routes['index']['controller']->index();
+            //$this->routes['index']['controller']->index();
+            echo "Error: Action is not registered.";
         }
     }
 }

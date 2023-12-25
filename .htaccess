@@ -3,6 +3,15 @@
     # RewriteEngine On
     RewriteEngine On
 
+
+    #################################################
+    #                  MAIN ROUTES                  #
+    #################################################
+
+    # Redirect /auth.php to auth.php
+    RewriteCond %{REQUEST_URI} ^/auth.php$ [NC]
+    RewriteRule ^(.*)$ public/auth.php [QSA,L]
+
     # Redirect /cars.php to cars.php
     RewriteCond %{REQUEST_URI} ^/cars.php$ [NC]
     RewriteRule ^(.*)$ public/cars.php [QSA,L]
@@ -11,12 +20,21 @@
     RewriteCond %{REQUEST_URI} ^/users.php$ [NC]
     RewriteRule ^(.*)$ public/users.php [QSA,L]
 
+    # Redirect the / path to index.php
+    RewriteCond %{REQUEST_URI} ^/$ [NC]
+    RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
+
+    # To redirect all non-existing files to index.php
+    # RewriteCond %{REQUEST_FILENAME} !-f [NC]
+    # RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
+
+
+    #################################################
+    #             PUBLIC INCLUDED FILES             #
+    #################################################
+
     # Allow to use main.js file
     RewriteCond %{REQUEST_URI} ^/js/main.js$ [NC]
     RewriteRule ^(.*)$ public/js/main.js [QSA,L]
-
-    # Redirect all non-existing files to index.php
-     RewriteCond %{REQUEST_URI} ^/$ [NC]
-    RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
 
 </IfModule>

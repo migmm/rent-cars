@@ -11,16 +11,12 @@
 
     <h1>Select an option:</h1>
 
-    <a href="cars.php">
-        <button>CarRouter</button>
+    <a href="auth.php?action=register">
+        <button>Register</button>
     </a>
 
-    <a href="users.php">
-        <button>UserRouter</button>
-    </a>
-
-    <a href="auth.php">
-        <button>LoginRouter</button>
+    <a href="auth.php?action=login">
+        <button>Login</button>
     </a>
 
 </body>
