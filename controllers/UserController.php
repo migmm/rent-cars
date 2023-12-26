@@ -44,7 +44,7 @@ class UserController
         $email = $_POST['email'];
         $city_id = (int)$_POST['city_id'];
         $country_id = (int)$_POST['country_id'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_ARGON2_DEFAULT_THREADS); 
         $role_id = (int)$_POST['role_id'];
         $profile_picture = $_POST['profile_picture'];
 
