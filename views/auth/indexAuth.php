@@ -19,6 +19,10 @@
         <button>Login</button>
     </a>
 
+    <a href="auth.php?action=logout">
+        <button>Logout</button>
+    </a>
+
 </body>
 
 </html>

@@ -8,6 +8,7 @@ $router = new Router($controller);
 $router->addRoute('register', 'register');
 $router->addRoute('login', 'login');
 $router->addRoute('signin', 'signin');
+$router->addRoute('logout', 'logout');
 $router->addRoute('index', 'index');
 
 $router->route();

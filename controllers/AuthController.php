@@ -24,7 +24,6 @@ class AuthController
             foreach ($_SESSION as $key => $value) {
                 echo "{$key}: {$value}\n";
             }
-            /*             session_destroy(); */
         } else {
             include '../views/auth/login.php';
         }
@@ -32,6 +31,10 @@ class AuthController
 
     public function signin()
     {
+        if ($_SERVER['REQUEST_METHOD']) {
+            die("Internal server error");
+        }
+
         $username = $_POST['username'];
         $password = $_POST['password'];
         $foundUser = $this->model->getUserByUsername($username);
@@ -48,6 +51,12 @@ class AuthController
         $_SESSION['password'] = $foundUser['password'];
         echo "User exist. Username: {$foundUser['username']}. Role: {$foundUser['role_id']}. Password: {$foundUser['password']}";
         print_r($foundUser);
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header("Location: ../public/auth.php");
     }
 
     public function register()
