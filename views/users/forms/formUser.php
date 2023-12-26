@@ -17,6 +17,8 @@ if ($user) {
 }
 
 ?>
+
+
 <label>First name:</label>
 <input type="text" name="first_name" value="<?php echo $first_name; ?>" required><br>
 
@@ -29,8 +31,14 @@ if ($user) {
 <label>Email:</label>
 <input type="text" name="email" value="<?php echo $email; ?>" required><br>
 
+<label>Repeat Email:</label>
+<input type="text" name="reemail" value="<?php echo $email; ?>" required><br>
+
 <label>Password:</label>
-<input type="text" name="password" value="<?php echo $password; ?>" required><br>
+<input type="password" name="password" value="<?php echo $password; ?>" required><br>
+
+<label>Repeat Password:</label>
+<input type="password" name="repassword" value="<?php echo $password; ?>" required><br>
 
 <label>City</label>
 <select name="city_id" id="citySelect" required>
