@@ -55,7 +55,7 @@ class AuthController
     public function logout()
     {
         session_destroy();
-        header("Location: ../public/auth.php");
+        header("Location: auth.php");
     }
 
     public function register()
