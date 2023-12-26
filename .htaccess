@@ -61,6 +61,7 @@
     RewriteCond %{REQUEST_URI} ^/views/$ [NC]
     RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
 
+
     #################################################
     #             PUBLIC INCLUDED FILES             #
     #################################################
