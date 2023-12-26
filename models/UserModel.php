@@ -36,6 +36,14 @@ class UserModel
         return $result->fetch_assoc();
     }
 
+    public function getUserByUsername($user) {
+        $stmt = $this->db->prepare("SELECT id, username, password, role_id FROM users WHERE username = ?");
+        $stmt->bind_param("s", $user);
+        $stmt->execute();
+    
+        return $stmt->get_result()->fetch_assoc();
+    }
+
     public function getRentalsByUserId($userId)
     {
         $userId = $this->db->real_escape_string($userId);

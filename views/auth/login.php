@@ -8,7 +8,7 @@
 
 <body>
     <h1>Login</h1>
-    <form action="auth.php?action=login" method="post">
+    <form action="auth.php?action=signin" method="post">
 
         <?php
 

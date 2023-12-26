@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once(__DIR__ . '/../models/UserModel.php');
 $controller = new AuthController($model);
 
@@ -19,13 +17,41 @@ class AuthController
         include '../views/auth/indexAuth.php';
     }
 
-    public function login() {
-        include '../views/auth/login.php';
+    public function login()
+    {
+        if (isset($_SESSION['username'])) {
+            echo "Session: ";
+            foreach ($_SESSION as $key => $value) {
+                echo "{$key}: {$value}\n";
+            }
+            /*             session_destroy(); */
+        } else {
+            include '../views/auth/login.php';
+        }
     }
 
-    public function register() {
+    public function signin()
+    {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $foundUser = $this->model->getUserByUsername($username);
+
+        if (!$foundUser) {
+            die("Invalid login credentials");
+        }
+
+        if ($foundUser['password'] !== $password) {
+            die("Invalid login credentials");
+        }
+        $_SESSION['username'] = $foundUser['username'];
+        $_SESSION['role'] = $foundUser['role_id'];
+        $_SESSION['password'] = $foundUser['password'];
+        echo "User exist. Username: {$foundUser['username']}. Role: {$foundUser['role_id']}. Password: {$foundUser['password']}";
+        print_r($foundUser);
+    }
+
+    public function register()
+    {
         include '../views/auth/register.php';
     }
 }
-
-?>
