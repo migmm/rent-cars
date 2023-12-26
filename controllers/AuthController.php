@@ -31,10 +31,6 @@ class AuthController
 
     public function signin()
     {
-        if ($_SERVER['REQUEST_METHOD']) {
-            die("Internal server error");
-        }
-
         $username = $_POST['username'];
         $password = $_POST['password'];
         $foundUser = $this->model->getUserByUsername($username);
@@ -43,13 +39,16 @@ class AuthController
             die("Invalid login credentials");
         }
 
-        if ($foundUser['password'] !== $password) {
+        if (!password_verify($password, $foundUser['password'])) {
             die("Invalid login credentials");
         }
+
         $_SESSION['username'] = $foundUser['username'];
         $_SESSION['role'] = $foundUser['role_id'];
         $_SESSION['password'] = $foundUser['password'];
+
         echo "User exist. Username: {$foundUser['username']}. Role: {$foundUser['role_id']}. Password: {$foundUser['password']}";
+
         print_r($foundUser);
     }
 
