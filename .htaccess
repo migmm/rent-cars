@@ -24,10 +24,42 @@
     RewriteCond %{REQUEST_URI} ^/$ [NC]
     RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
 
-    # To redirect all non-existing files to index.php
-    # RewriteCond %{REQUEST_FILENAME} !-f [NC]
-    # RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
 
+    #################################################
+    #               FORBIDDEN FOLDERS               #
+    #################################################
+
+    # Redirect the /configs/ to index.php
+    RewriteCond %{REQUEST_URI} ^/configs/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
+
+    # Redirect the /controller/ to index.php
+    RewriteCond %{REQUEST_URI} ^/controller/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
+
+    # Redirect the /core/ to index.php
+    RewriteCond %{REQUEST_URI} ^/core/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
+
+    # Redirect the /models/ to index.php
+    RewriteCond %{REQUEST_URI} ^/models/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
+
+    # Redirect the /public/ to index.php
+    RewriteCond %{REQUEST_URI} ^/public/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
+
+    # Redirect the /templates/ to index.php
+    RewriteCond %{REQUEST_URI} ^/templates/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
+
+    # Redirect the /utils/ to index.php
+    RewriteCond %{REQUEST_URI} ^/utils/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
+
+    # Redirect the /views/ to index.php
+    RewriteCond %{REQUEST_URI} ^/views/$ [NC]
+    RewriteRule ^(.*)$ public/redirectToHome.php [QSA,L]
 
     #################################################
     #             PUBLIC INCLUDED FILES             #
@@ -36,5 +68,9 @@
     # Allow to use main.js file
     RewriteCond %{REQUEST_URI} ^/js/main.js$ [NC]
     RewriteRule ^(.*)$ public/js/main.js [QSA,L]
+
+    # To redirect all non-existing files to index.php
+    # RewriteCond %{REQUEST_FILENAME} !-f [NC]
+    # RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
 
 </IfModule>
