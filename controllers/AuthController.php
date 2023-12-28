@@ -1,15 +1,27 @@
 <?php
 
 require_once(__DIR__ . '/../models/UserModel.php');
-$controller = new AuthController($model);
+require_once(__DIR__ . '/../utils/jwtToken.php');
+
+$dotenv = parse_ini_file(__DIR__ . '/../.env');
+
+$secretKey = $dotenv['SECRET_KEY'];
+$encryptionKey = $dotenv['ENCRYPTION_KEY'];
+
+$controller = new AuthController($model, $secretKey, $encryptionKey);
 
 class AuthController
 {
-    private $model;
 
-    public function __construct($model)
+    private $model;
+    private $secretKey;
+    private $encryptionKey;
+
+    public function __construct($model, $secretKey, $encryptionKey)
     {
         $this->model = $model;
+        $this->secretKey = $secretKey;
+        $this->encryptionKey = $encryptionKey;
     }
 
     public function index()
@@ -47,6 +59,18 @@ class AuthController
         $_SESSION['role'] = $foundUser['role_id'];
         $_SESSION['password'] = $foundUser['password'];
 
+        $userData = array(
+            'id' => $foundUser['id'],
+            'username' => $foundUser['username'],
+            'role' => $foundUser['role_id'],
+        );
+
+        generateAndSetCookie(
+            $userData,
+            $this->secretKey,
+            $this->encryptionKey
+        );
+
         echo "User exist. Username: {$foundUser['username']}. Role: {$foundUser['role_id']}. Password: {$foundUser['password']}";
 
         print_r($foundUser);
@@ -63,3 +87,5 @@ class AuthController
         include '../views/auth/register.php';
     }
 }
+
+?>
