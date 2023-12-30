@@ -43,8 +43,11 @@
                 <td><?php echo $car['air_conditioner']; ?></td>
                 <td><?php echo $car['consumption']; ?></td>
                 <td><?php echo $car['user_id']; ?></td>
-                <td><?php echo $car['image']; ?></td>
-
+                <td>
+                    <?php foreach ($car['images'] as $image) : ?>
+                        <img src="../public/images/<?php echo $image; ?>" alt="Car Image">
+                    <?php endforeach; ?>
+                </td>
                 <td>
                     <a href="cars.php?action=editCar&id=<?php echo $car['id']; ?>">Edit</a>
                     <a href="cars.php?action=deleteCar&id=<?php echo $car['id']; ?>">Delete</a>

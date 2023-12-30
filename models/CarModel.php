@@ -102,6 +102,21 @@ class RentalCarModel
         $stmt->bind_param('is', $carId, $imageName);
         return $stmt->execute();
     }
+
+    public function getCarImages($carId)
+    {
+        $carId = $this->db->real_escape_string($carId);
+        $query = "SELECT * FROM car_images WHERE car_id = $carId";
+        $result = $this->db->query($query);
+    
+        $images = [];
+        while ($row = $result->fetch_assoc()) {
+            $images[] = $row['image_name'];
+        }
+    
+        return $images;
+    }
+
     public function deleteCar($carId)
     {
         $carId = $this->db->real_escape_string($carId);
@@ -110,3 +125,5 @@ class RentalCarModel
         return $this->db->query($query);
     }
 }
+
+?>

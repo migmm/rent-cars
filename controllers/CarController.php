@@ -17,15 +17,21 @@ class RentalCarController
     public function index()
     {
         $cars = $this->model->getAllCars();
+
+        foreach ($cars as &$car) {
+            $carId = $car['id'];
+            $car['images'] = $this->model->getCarImages($carId);
+        }
+    
         include '../views/cars/indexCars.php';
     }
+    
 
     public function createCar()
     {
         include '../views/cars/createCar.php';
     }
 
-    
     public function storeCar()
     {
         $requiredFields = ['name', 'brand', 'year', 'transmission', 'passengers', 'city_id', 'country_id', 'rental_id', 'category_id', 'consumption', 'user_id'];
@@ -56,7 +62,7 @@ class RentalCarController
 
             $length = $this->filenameLength;
             $random_name = substr(uniqid('', true), 0, $length) . '.' . $file_extension;
-            
+
             $target_path = $this->uploadDirectory . $random_name;
             move_uploaded_file($_FILES['images']['tmp_name'][$key], $target_path);
             $imageNames[] = $random_name;
@@ -87,6 +93,17 @@ class RentalCarController
         include '../views/cars/editCar.php';
     }
 
+    public function viewCar($carId)
+    {
+        $car = $this->model->getCarById($carId);
+        $carImages = $this->model->getCarImages($carId);
+
+        if (!$car) {
+            die("Query Failed.");
+        }
+
+        include '../views/cars/viewCar.php';
+    }
 
     public function updateCar($carId)
     {
@@ -136,7 +153,6 @@ class RentalCarController
         // header("Location: view_car.php?id=$carId");
         // exit();
     }
-    
 
     public function deleteCar($carId)
     {
