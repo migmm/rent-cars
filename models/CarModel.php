@@ -35,7 +35,7 @@ class RentalCarModel
         return $result->fetch_assoc();
     }
 
-    public function createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image)
+    public function createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id)
     {
         $query = "INSERT INTO cars (
             name, 
@@ -49,11 +49,9 @@ class RentalCarModel
             category_id,
             air_conditioner, 
             consumption, 
-            user_id, 
-            image
+            user_id 
     ) 
     VALUES (
-        ?, 
         ?, 
         ?, 
         ?, 
@@ -69,12 +67,12 @@ class RentalCarModel
     )";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssisiiiiidiis', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id, $image);
+        $stmt->bind_param('ssisiiiiidii', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id);
 
         return $stmt->execute();
     }
 
-    public function updateCar($id, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $rental_id)
+    public function updateCar($id, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $rental_id)
     {
         $query = "UPDATE cars SET 
                     name = ?, 
@@ -88,13 +86,20 @@ class RentalCarModel
                     air_conditioner = ?, 
                     consumption = ?, 
                     user_id = ?, 
-                    image = ?,
                     rental_id = ?
                     WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssisiiiiidisii', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $rental_id, $id);
+        $stmt->bind_param('ssisiiiiidiii', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $rental_id, $id);
 
+        return $stmt->execute();
+    }
+
+    public function storeCarImage($carId, $imageName)
+    {
+        $query = "INSERT INTO car_images (car_id, image_name) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('is', $carId, $imageName);
         return $stmt->execute();
     }
     public function deleteCar($carId)

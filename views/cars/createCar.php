@@ -14,7 +14,7 @@ $car = null;
 
 <body>
     <h1>Add new car</h1>
-    <form action="cars.php?action=storeCar" method="post">
+    <form action="cars.php?action=storeCar" method="post" enctype="multipart/form-data">
 
         <?php
 

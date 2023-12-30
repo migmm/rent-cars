@@ -146,6 +146,7 @@ if ($car) {
         </label><br> -->
 
 <label>Image:</label>
-<input type="text" name="image" value="<?php echo $image; ?>" required><br>
+<input type="file" name="images[]" multiple accept="image/*"><br>
+
 
 <input type="submit" value="Save">
