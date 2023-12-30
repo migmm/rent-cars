@@ -87,9 +87,10 @@ class RentalCarController
         include '../views/cars/editCar.php';
     }
 
+
     public function updateCar($carId)
     {
-        $requiredFields = ['name', 'brand', 'year', 'transmission', 'passengers', 'city_id', 'country_id', 'category_id', 'consumption', 'image',];
+        $requiredFields = ['name', 'brand', 'year', 'transmission', 'passengers', 'city_id', 'country_id', 'category_id', 'consumption', 'user_id'];
         foreach ($requiredFields as $field) {
             if (empty($_POST[$field])) {
                 die("Error: $field is required.");
@@ -108,23 +109,34 @@ class RentalCarController
         $user_id = $_POST['user_id'];
         $air_conditioner = isset($_POST['air_conditioner']) ? 1 : 0;
         $consumption = (float)$_POST['consumption'];
-        $image = $_POST['image'];
 
-        echo "<pre>";
-        echo "POST Data:\n";
-        var_dump($_POST);
-        echo "</pre>";
+        $imageNames = [];
 
-        $result = $this->model->updateCar($carId, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $image, $rental_id);
+        foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+            $file_extension = pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
 
-        echo $result;
+            $length = $this->filenameLength;
+            $random_name = substr(uniqid('', true), 0, $length) . '.' . $file_extension;
+
+            $target_path = $this->uploadDirectory . $random_name;
+            move_uploaded_file($_FILES['images']['tmp_name'][$key], $target_path);
+            $imageNames[] = $random_name;
+        }
+
+        $result = $this->model->updateCar($carId, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $rental_id);
 
         if (!$result) {
             die("Query Failed.");
         }
 
-        /*  header("Location: ../public/index.php"); */
+        foreach ($imageNames as $imageName) {
+            $this->model->storeCarImage($carId, $imageName);
+        }
+
+        // header("Location: view_car.php?id=$carId");
+        // exit();
     }
+    
 
     public function deleteCar($carId)
     {

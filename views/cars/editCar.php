@@ -14,7 +14,7 @@ include('../configs/database.php');
 <body>
     <h1>Edit Car</h1>
 
-    <form action="cars.php?action=updateCar&id=<?php echo $car['id']; ?>" method="post">
+    <form action="cars.php?action=updateCar&id=<?php echo $car['id']; ?>" method="post" enctype="multipart/form-data">
     
         <?php
 
