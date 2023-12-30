@@ -195,3 +195,5 @@ class RentalCarController
         header("Location: cars.php");
     }
 }
+
+?>
