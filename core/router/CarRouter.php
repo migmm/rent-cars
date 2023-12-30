@@ -11,8 +11,6 @@ $router->addRoute('storeCar', 'storeCar');
 $router->addRoute('editCar', 'editCar');
 $router->addRoute('updateCar', 'updateCar');
 $router->addRoute('deleteCar', 'deleteCar');
-$router->addRoute('showCar', 'showCar');
-$router->addRoute('confirmDeleteCar', 'confirmDeleteCar');
 $router->addRoute('index', 'index');
 
 $router->route();

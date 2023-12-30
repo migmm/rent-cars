@@ -93,18 +93,6 @@ class RentalCarController
         include '../views/cars/editCar.php';
     }
 
-    public function viewCar($carId)
-    {
-        $car = $this->model->getCarById($carId);
-        $carImages = $this->model->getCarImages($carId);
-
-        if (!$car) {
-            die("Query Failed.");
-        }
-
-        include '../views/cars/viewCar.php';
-    }
-
     public function updateCar($carId)
     {
         $requiredFields = ['name', 'brand', 'year', 'transmission', 'passengers', 'city_id', 'country_id', 'category_id', 'consumption', 'user_id'];
