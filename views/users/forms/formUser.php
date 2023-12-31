@@ -97,6 +97,9 @@ if ($user) {
 </select><br>
 
 <label>Profile picture:</label>
+<?php if (!empty($profile_picture)) : ?>
+    <img id="profilePicturePreview" src="<?php echo $profile_picture; ?>" alt="Profile Picture" style="max-width: 200px; max-height: 200px;"><br>
+<?php endif; ?>
 <input type="file" name="profile_picture" accept="image/*"><br>
 
 <input type="submit" value="Save">
