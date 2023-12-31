@@ -99,7 +99,7 @@ if ($user) {
 <label>Profile picture:</label>
 
 <?php if (!empty($profile_picture)) : ?>
-    <img id="profilePicturePreview" src="<?php echo $profile_picture; ?>" alt="Profile Picture" style="max-width: 200px; max-height: 200px;"><br>
+    <img id="profilePicturePreview" src="<?php echo $profile_picture; ?>" alt="Profile Picture"><br>
 <?php endif; ?>
 
 <input type="file" name="profile_picture" accept="image/*" onchange="previewProfilePicture(event)"><br>
