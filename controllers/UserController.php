@@ -113,16 +113,21 @@ class UserController
         $country_id = (int)$_POST['country_id'];
         $password = $_POST['password'];
         $role_id = (int)$_POST['role_id'];
-        $profile_picture = $_POST['profile_picture'];
 
         if (!empty($_FILES['profile_picture']['tmp_name'])) {
             $originalImagePath = $_FILES['profile_picture']['tmp_name'];
 
-            $resizedImagePath = $this->uploadDirectory . 'resized/' . 'profile_picture_' . $userId . '.jpg';
+            $uniqueFilename = uniqid('profile_', true);
+            $uploadDirectory = $this->uploadDirectory;
+            $resizedImagePath = $uploadDirectory . $uniqueFilename . '.jpg';
 
-            $this->resizeAndSaveImage($originalImagePath, $resizedImagePath, 300, 200);
+            $targetPath = $uploadDirectory . $uniqueFilename . '.jpg';
+            move_uploaded_file($originalImagePath, $targetPath);
+            $this->resizeAndSaveImage($targetPath, $resizedImagePath, 300, 200);
 
-            $this->model->updateUserProfilePicture($userId, $resizedImagePath);
+            $profile_picture = $resizedImagePath;
+        } else {
+            $profile_picture = null;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

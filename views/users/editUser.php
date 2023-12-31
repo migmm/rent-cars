@@ -14,7 +14,7 @@ include('../configs/database.php');
 <body>
     <h1>Edit User</h1>
 
-    <form action="users.php?action=updateUser&id=<?php echo $user['id']; ?>" method="post">
+    <form action="users.php?action=updateUser&id=<?php echo $user['id']; ?>" method="post" enctype="multipart/form-data">
 
         <?php
 
