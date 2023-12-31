@@ -97,6 +97,6 @@ if ($user) {
 </select><br>
 
 <label>Profile picture:</label>
-<input type="text" name="profile_picture" value="<?php echo $profile_picture; ?>" required><br>
+<input type="file" name="profile_picture" accept="image/*"><br>
 
 <input type="submit" value="Save">

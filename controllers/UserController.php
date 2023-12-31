@@ -7,6 +7,8 @@ class UserController
 {
     private $model;
 
+    private $uploadDirectory = "../public/images/";
+
     public function __construct($model)
     {
         $this->model = $model;
@@ -44,13 +46,28 @@ class UserController
         $email = $_POST['email'];
         $city_id = (int)$_POST['city_id'];
         $country_id = (int)$_POST['country_id'];
-        $password = password_hash($_POST['password'], PASSWORD_ARGON2_DEFAULT_THREADS); 
+        $password = password_hash($_POST['password'], PASSWORD_ARGON2_DEFAULT_THREADS);
         $role_id = (int)$_POST['role_id'];
-        $profile_picture = $_POST['profile_picture'];
+
+        if (!empty($_FILES['profile_picture']['tmp_name'])) {
+            $originalImagePath = $_FILES['profile_picture']['tmp_name'];
+
+            $uniqueFilename = uniqid('profile_', true);
+            $uploadDirectory = $this->uploadDirectory;
+            $resizedImagePath = $uploadDirectory . $uniqueFilename . '.jpg';
+
+            $targetPath = $uploadDirectory . $uniqueFilename . '.jpg';
+            move_uploaded_file($originalImagePath, $targetPath);
+            $this->resizeAndSaveImage($targetPath, $resizedImagePath, 300, 200);
+
+            $profile_picture = $resizedImagePath;
+        } else {
+            $profile_picture = null;
+        }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             die("Error: Invalid email format.");
-        } 
+        }
 
         echo "<pre>";
         echo "POST Data:\n";
@@ -98,9 +115,19 @@ class UserController
         $role_id = (int)$_POST['role_id'];
         $profile_picture = $_POST['profile_picture'];
 
+        if (!empty($_FILES['profile_picture']['tmp_name'])) {
+            $originalImagePath = $_FILES['profile_picture']['tmp_name'];
+
+            $resizedImagePath = $this->uploadDirectory . 'resized/' . 'profile_picture_' . $userId . '.jpg';
+
+            $this->resizeAndSaveImage($originalImagePath, $resizedImagePath, 300, 200);
+
+            $this->model->updateUserProfilePicture($userId, $resizedImagePath);
+        }
+
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             die("Error: Invalid email format.");
-        } 
+        }
 
         echo "<pre>";
         echo "POST Data:\n";
@@ -118,6 +145,39 @@ class UserController
         /*   header("Location: ../public/index.php"); */
     }
 
+    function resizeAndSaveImage($sourcePath, $targetPath, $newWidth, $newHeight)
+    {
+        list($originalWidth, $originalHeight) = getimagesize($sourcePath);
+
+        $ratio = $originalWidth / $originalHeight;
+        if ($newWidth / $newHeight > $ratio) {
+            $newWidth = $newHeight * $ratio;
+        } else {
+            $newHeight = $newWidth / $ratio;
+        }
+
+        $sourceImage = imagecreatefromjpeg($sourcePath);
+        $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+
+        imagecopyresampled(
+            $resizedImage,
+            $sourceImage,
+            0,
+            0,
+            0,
+            0,
+            $newWidth,
+            $newHeight,
+            $originalWidth,
+            $originalHeight
+        );
+
+        imagejpeg($resizedImage, $targetPath);
+
+        imagedestroy($sourceImage);
+        imagedestroy($resizedImage);
+    }
+
     public function deleteUser($userId)
     {
 
@@ -130,3 +190,5 @@ class UserController
         header("Location: users.php");
     }
 }
+
+?>

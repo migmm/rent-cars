@@ -22,10 +22,9 @@ class RentalCarController
             $carId = $car['id'];
             $car['images'] = $this->model->getCarImages($carId);
         }
-    
+
         include '../views/cars/indexCars.php';
     }
-    
 
     public function createCar()
     {
@@ -59,10 +58,10 @@ class RentalCarController
 
         foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
             $file_extension = pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
-    
+
             $length = $this->filenameLength;
             $random_name = substr(uniqid('', true), 0, $length) . '.' . $file_extension;
-    
+
             $target_path = $this->uploadDirectory . $random_name;
 
             move_uploaded_file($_FILES['images']['tmp_name'][$key], $target_path);
@@ -124,10 +123,10 @@ class RentalCarController
 
         foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
             $file_extension = pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
-    
+
             $length = $this->filenameLength;
             $random_name = substr(uniqid('', true), 0, $length) . '.' . $file_extension;
-    
+
             $target_path = $this->uploadDirectory . $random_name;
 
             move_uploaded_file($_FILES['images']['tmp_name'][$key], $target_path);
@@ -154,17 +153,17 @@ class RentalCarController
 
     function resizeAndSaveImage($sourcePath, $targetPath, $newWidth, $newHeight) {
         list($originalWidth, $originalHeight) = getimagesize($sourcePath);
-    
+
         $ratio = $originalWidth / $originalHeight;
         if ($newWidth / $newHeight > $ratio) {
             $newWidth = $newHeight * $ratio;
         } else {
             $newHeight = $newWidth / $ratio;
         }
-    
+
         $sourceImage = imagecreatefromjpeg($sourcePath);
         $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
-    
+
         imagecopyresampled(
             $resizedImage,
             $sourceImage,
@@ -177,7 +176,7 @@ class RentalCarController
             $originalWidth,
             $originalHeight
         );
-    
+
         imagejpeg($resizedImage, $targetPath);
 
         imagedestroy($sourceImage);

@@ -14,7 +14,7 @@ $user = null;
 
 <body>
     <h1>New user</h1>
-    <form action="users.php?action=storeUser" method="post">
+    <form action="users.php?action=storeUser" method="post" enctype="multipart/form-data">
 
         <?php
 
