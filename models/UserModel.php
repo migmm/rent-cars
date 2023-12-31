@@ -145,6 +145,24 @@ class UserModel
         return $result;
     }
 
+    public function getUserPhotoPath($userId)
+    {
+        $query = "SELECT profile_picture FROM users WHERE id = ?";
+        
+        $statement = $this->db->prepare($query);
+        $statement->bind_param('i', $userId);
+        $statement->execute();
+
+        $result = $statement->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['profile_picture'];
+        }
+
+        return null;
+    }
+
     public function deleteUser($userId)
     {
         $userId = $this->db->real_escape_string($userId);

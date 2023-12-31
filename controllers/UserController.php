@@ -114,6 +114,8 @@ class UserController
         $password = $_POST['password'];
         $role_id = (int)$_POST['role_id'];
 
+        $currentPhotoPath = $this->model->getUserPhotoPath($userId);
+
         if (!empty($_FILES['profile_picture']['tmp_name'])) {
             $originalImagePath = $_FILES['profile_picture']['tmp_name'];
 
@@ -128,6 +130,10 @@ class UserController
             $profile_picture = $resizedImagePath;
         } else {
             $profile_picture = null;
+        }
+
+        if ($currentPhotoPath && file_exists($currentPhotoPath)) {
+            unlink($currentPhotoPath);
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
