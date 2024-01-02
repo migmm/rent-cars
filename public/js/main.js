@@ -36,6 +36,26 @@ function previewProfilePicture(event) {
     }
 }
 
+function previewCarImages(event) {
+    const input = event.target;
+    const previewsContainer = document.getElementById('carImagesPreview');
+
+    previewsContainer.innerHTML = '';
+
+    for (const file of input.files) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = 'Car Image';
+            img.style.maxWidth = '200px';
+            img.style.maxHeight = '200px';
+            previewsContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     getCities();
 });

@@ -146,7 +146,11 @@ if ($car) {
         </label><br> -->
 
 <label>Image:</label>
-<input type="file" name="images[]" multiple accept="image/*"><br>
+<?php foreach ($carImages as $carImage) : ?>
+    <img src="<?php echo $carImage; ?>" alt="Car Image">
+<?php endforeach; ?>
+
+<input type="file" name="images[]" multiple accept="image/*" onchange="previewCarImages(event)"><br>
 
 
 <input type="submit" value="Save">

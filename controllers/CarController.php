@@ -94,6 +94,8 @@ class RentalCarController
             die("Query Failed.");
         }
 
+        $carImages = $this->model->getCarImages($carId);
+
         include '../views/cars/editCar.php';
     }
 
