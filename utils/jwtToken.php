@@ -5,11 +5,6 @@ $dotenv = parse_ini_file(__DIR__ . '/../.env');
 $secretKey = $dotenv['SECRET_KEY'];
 $encryptionKey = $dotenv['ENCRYPTION_KEY'];
 
-$userData = array(
-    'id' => 1,
-    'username' => 'usuario',
-    'role' => 'admin',
-);
 
 function generateAndSetCookie($userData, $secretKey, $encryptionKey)
 {
@@ -73,9 +68,9 @@ function jwt_decode($token, $key)
     return false;
 }
 
-function decryptCookie($data)
+function decryptCookie($data, $encryptionKey)
 {
-    $key = 'tu_clave_de_encriptacion';
+    $key = $encryptionKey;
     $data = base64_decode($data);
 
     $iv = substr($data, 0, 16);
@@ -92,23 +87,28 @@ function decryptCookie($data)
     return $decryptedData;
 }
 
-function getCookie($secretKey)
+function getCookie($secretKey, $encryptionKey)
 {
     if (isset($_COOKIE['jwt_cookie'])) {
         $encryptedToken = $_COOKIE['jwt_cookie'];
-        $decryptedToken = decryptCookie($encryptedToken);
+        $decryptedToken = decryptCookie($encryptedToken, $encryptionKey);
+
+        echo "Decrypted Token: " . $decryptedToken . "<br>";
 
         $decodedToken = jwt_decode($decryptedToken, $secretKey);
+
+        echo "Decoded Token: ";
+        print_r($decodedToken);
 
         if ($decodedToken !== false) {
             echo "ID: " . $decodedToken['id'] . "<br>";
             echo "Username: " . $decodedToken['username'] . "<br>";
             echo "Role: " . $decodedToken['role'] . "<br>";
         } else {
-            echo "Error al decodificar el token.";
+            echo "Error decoding token.";
         }
     } else {
-        echo "No se encontró la cookie.";
+        echo "Cookie not found.";
     }
 }
 
@@ -153,6 +153,6 @@ function logout()
     );
 }
 
-getCookie($secretKey);
+getCookie($secretKey, $encryptionKey);
 
 ?>

@@ -3,12 +3,8 @@
 require_once(__DIR__ . '/../models/UserModel.php');
 require_once(__DIR__ . '/../utils/jwtToken.php');
 
-$dotenv = parse_ini_file(__DIR__ . '/../.env');
-
-$secretKey = $dotenv['SECRET_KEY'];
-$encryptionKey = $dotenv['ENCRYPTION_KEY'];
-
 $controller = new AuthController($model, $secretKey, $encryptionKey);
+
 
 class AuthController
 {
