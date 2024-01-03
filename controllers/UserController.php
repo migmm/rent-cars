@@ -1,17 +1,22 @@
 <?php
 
 require_once(__DIR__ . '/../models/UserModel.php');
-$controller = new UserController($model);
+require_once(__DIR__ . '/../utils/jwtToken.php');
+
+$controller = new UserController($model, $secretKey, $encryptionKey);
 
 class UserController
 {
     private $model;
-
     private $uploadDirectory = "../public/images/";
+    private $secretKey;
+    private $encryptionKey;
 
-    public function __construct($model)
+    public function __construct($model, $secretKey, $encryptionKey)
     {
         $this->model = $model;
+        $this->secretKey = $secretKey;
+        $this->encryptionKey = $encryptionKey;
     }
 
     public function index()
