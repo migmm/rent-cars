@@ -1,17 +1,23 @@
 <?php
 
 require_once(__DIR__ . '/../models/CarModel.php');
-$controller = new RentalCarController($model);
+require_once(__DIR__ . '/../utils/jwtToken.php');
+
+$controller = new RentalCarController($model, $secretKey, $encryptionKey);
 
 class RentalCarController
 {
     private $model;
     private $uploadDirectory = "../public/images/";
     private $filenameLength = 10;
+    private $secretKey;
+    private $encryptionKey;
 
-    public function __construct($model)
+    public function __construct($model, $secretKey, $encryptionKey)
     {
         $this->model = $model;
+        $this->secretKey = $secretKey;
+        $this->encryptionKey = $encryptionKey;
     }
 
     public function index()
