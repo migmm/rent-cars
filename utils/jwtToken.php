@@ -8,6 +8,9 @@ $encryptionKey = $dotenv['ENCRYPTION_KEY'];
 
 function generateAndSetCookie($userData, $secretKey, $encryptionKey)
 {
+    echo $secretKey;
+    echo $encryptionKey;
+    
     $jwt = jwt_encode($userData, $secretKey);
     setcookie(
         'jwt_cookie',
@@ -15,18 +18,20 @@ function generateAndSetCookie($userData, $secretKey, $encryptionKey)
             $jwt,
             $encryptionKey
         ),
-        0,
+        time() + 86400,  // 24h in seconds
         '/',
         '',
-        true,
+        false,
         true
     );
 }
 
 //generateAndSetCookie($userData, $secretKey, $encryptionKey);
 
-function encryptCookie($data, $key)
+function encryptCookie($data, $encryptionKey)
 {
+    $key = substr(hash('sha256', $encryptionKey, true), 0, 32);
+
     $iv = openssl_random_pseudo_bytes(16);
     $encryptedData = openssl_encrypt(
         $data,
@@ -35,11 +40,22 @@ function encryptCookie($data, $key)
         0,
         $iv
     );
-    $encryptedCookie = base64_encode(
-        $iv .
-            $encryptedData
-    );
+    $encryptedCookie = base64_encode($iv . $encryptedData);
     return $encryptedCookie;
+}
+
+function jwt_encode($data, $key)
+{
+    $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+    $payload = json_encode($data);
+    
+    $base64UrlHeader = base64_encode($header);
+    $base64UrlPayload = base64_encode($payload);
+
+    $signature = hash_hmac('sha256', $base64UrlHeader . '.' . $base64UrlPayload, $key, true);
+    $base64UrlSignature = base64_encode($signature);
+
+    return $base64UrlHeader . '.' . $base64UrlPayload . '.' . $base64UrlSignature;
 }
 
 function jwt_decode($token, $key)
@@ -51,26 +67,31 @@ function jwt_decode($token, $key)
         $payload = json_decode(base64_decode($tokenParts[1]), true);
         $signature = base64_decode($tokenParts[2]);
 
-        if ($header !== null && $payload !== null) {
-            $rawSignature = hash_hmac(
-                'sha256',
-                $tokenParts[0] . '.' . $tokenParts[1],
-                $key,
-                true
-            );
+        if ($header !== null && $payload !== null && isset($header['alg']) && $header['alg'] === 'HS256') {
+            $rawSignature = hash_hmac('sha256', $tokenParts[0] . '.' . $tokenParts[1], $key, true);
 
             if (hash_equals($signature, $rawSignature)) {
                 return $payload;
+            } else {
+                echo "Error: Firma inválida.<br>";
             }
+        } else {
+            echo "Error: No se pudo decodificar el encabezado o el payload, o el algoritmo no es compatible.<br>";
         }
+    } else {
+        echo "Error: El token no tiene el formato esperado.<br>";
     }
 
     return false;
 }
 
+
+
 function decryptCookie($data, $encryptionKey)
 {
-    $key = $encryptionKey;
+    $key = substr(hash('sha256', $encryptionKey, true), 0, 32);
+    echo "Clave utilizada para descifrado: " . base64_encode($key) . "<br>";
+
     $data = base64_decode($data);
 
     $iv = substr($data, 0, 16);
@@ -84,13 +105,24 @@ function decryptCookie($data, $encryptionKey)
         $iv
     );
 
+    if ($decryptedData === false) {
+        echo "Error al descifrar cookie: " . openssl_error_string() . "<br>";
+        return false;
+    }
+
     return $decryptedData;
 }
+
+
+
 
 function getCookie($secretKey, $encryptionKey)
 {
     if (isset($_COOKIE['jwt_cookie'])) {
         $encryptedToken = $_COOKIE['jwt_cookie'];
+        
+        echo "Encrypted Token: " . $encryptedToken . "<br>";
+
         $decryptedToken = decryptCookie($encryptedToken, $encryptionKey);
 
         echo "Decrypted Token: " . $decryptedToken . "<br>";
@@ -112,34 +144,6 @@ function getCookie($secretKey, $encryptionKey)
     }
 }
 
-function jwt_encode($data, $key)
-{
-    $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
-    $payload = json_encode($data);
-    $base64UrlHeader = str_replace(
-        ['+', '/', '='],
-        ['-', '_', ''],
-        base64_encode($header)
-    );
-    $base64UrlPayload = str_replace(
-        ['+', '/', '='],
-        ['-', '_', ''],
-        base64_encode($payload)
-    );
-    $signature = hash_hmac(
-        'sha256',
-        $base64UrlHeader . '.' . $base64UrlPayload,
-        $key,
-        true
-    );
-    $base64UrlSignature = str_replace(
-        ['+', '/', '='],
-        ['-', '_', ''],
-        base64_encode($signature)
-    );
-    return $base64UrlHeader . '.' . $base64UrlPayload . '.' . $base64UrlSignature;
-}
-
 function clean_cookie()
 {
     setcookie(
@@ -148,10 +152,11 @@ function clean_cookie()
         time() - 3600,
         '/',
         '',
-        true,
+        false,
         true
     );
 }
+
 
 getCookie($secretKey, $encryptionKey);
 
