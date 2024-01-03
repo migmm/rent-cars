@@ -75,6 +75,7 @@ class AuthController
     public function logout()
     {
         session_destroy();
+        logout();
         header("Location: auth.php");
     }
 
