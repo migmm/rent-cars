@@ -140,7 +140,7 @@ function jwt_encode($data, $key)
     return $base64UrlHeader . '.' . $base64UrlPayload . '.' . $base64UrlSignature;
 }
 
-function logout()
+function clean_cookie()
 {
     setcookie(
         'jwt_cookie',
