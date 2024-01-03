@@ -8,7 +8,6 @@ $controller = new AuthController($model, $secretKey, $encryptionKey);
 
 class AuthController
 {
-
     private $model;
     private $secretKey;
     private $encryptionKey;
