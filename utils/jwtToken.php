@@ -6,6 +6,13 @@ $secretKey = $dotenv['SECRET_KEY'];
 $encryptionKey = $dotenv['ENCRYPTION_KEY'];
 
 
+/*
+ *
+ * Usage
+ * generateAndSetCookie($userData, $secretKey, $encryptionKey);
+ *
+*/
+
 function generateAndSetCookie($userData, $secretKey, $encryptionKey)
 {
     echo $secretKey;
@@ -25,8 +32,6 @@ function generateAndSetCookie($userData, $secretKey, $encryptionKey)
         true
     );
 }
-
-//generateAndSetCookie($userData, $secretKey, $encryptionKey);
 
 function encryptCookie($data, $encryptionKey)
 {
@@ -73,24 +78,22 @@ function jwt_decode($token, $key)
             if (hash_equals($signature, $rawSignature)) {
                 return $payload;
             } else {
-                echo "Error: Firma inválida.<br>";
+                echo "Error: Invalid signature.<br>";
             }
         } else {
-            echo "Error: No se pudo decodificar el encabezado o el payload, o el algoritmo no es compatible.<br>";
+            echo "Error: Can't decode payload or signature is invalid<br>";
         }
     } else {
-        echo "Error: El token no tiene el formato esperado.<br>";
+        echo "Error: Unexpected token format.<br>";
     }
 
     return false;
 }
 
-
-
 function decryptCookie($data, $encryptionKey)
 {
     $key = substr(hash('sha256', $encryptionKey, true), 0, 32);
-    echo "Clave utilizada para descifrado: " . base64_encode($key) . "<br>";
+    echo "Decode key: " . base64_encode($key) . "<br>";
 
     $data = base64_decode($data);
 
@@ -106,15 +109,12 @@ function decryptCookie($data, $encryptionKey)
     );
 
     if ($decryptedData === false) {
-        echo "Error al descifrar cookie: " . openssl_error_string() . "<br>";
+        echo "Error decoding cookie: " . openssl_error_string() . "<br>";
         return false;
     }
 
     return $decryptedData;
 }
-
-
-
 
 function getCookie($secretKey, $encryptionKey)
 {
