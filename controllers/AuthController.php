@@ -38,8 +38,10 @@ class AuthController
 
     public function signin()
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = isset($_POST['username']) ? $_POST['username'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $rememberMe = isset($_POST['rememberme']) ? $_POST['rememberme'] : '';
+
         $foundUser = $this->model->getUserByUsername($username);
 
         if (!$foundUser) {
@@ -60,11 +62,13 @@ class AuthController
             'role' => $foundUser['role_id'],
         );
 
-        generateAndSetCookie(
-            $userData,
-            $this->secretKey,
-            $this->encryptionKey
-        );
+        if ($rememberMe) {
+            generateAndSetCookie(
+                $userData,
+                $this->secretKey,
+                $this->encryptionKey
+            );
+        }
 
         echo "User exist. Username: {$foundUser['username']}. Role: {$foundUser['role_id']}. Password: {$foundUser['password']}";
 

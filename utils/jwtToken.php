@@ -136,6 +136,11 @@ function getCookie($secretKey, $encryptionKey)
             echo "ID: " . $decodedToken['id'] . "<br>";
             echo "Username: " . $decodedToken['username'] . "<br>";
             echo "Role: " . $decodedToken['role'] . "<br>";
+
+            $_SESSION['username'] = $decodedToken['username'];
+            $_SESSION['role'] = $decodedToken['role'] ;
+            $_SESSION['id'] = $decodedToken['id'] ;
+
         } else {
             echo "Error decoding token.";
         }
