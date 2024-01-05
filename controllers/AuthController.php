@@ -27,10 +27,12 @@ class AuthController
     public function login()
     {
         if (isset($_SESSION['username'])) {
-            echo "Session: ";
-            foreach ($_SESSION as $key => $value) {
-                echo "{$key}: {$value}\n";
-            }
+            echo "Session: " . $_SESSION['username'];
+        /*             
+        foreach ($_SESSION as $key => $value) {
+            echo "{$key}: {$value}\n";
+        } 
+        */
         } else {
             include '../views/auth/login.php';
         }
@@ -39,8 +41,8 @@ class AuthController
     public function signin()
     {
         $username = isset($_POST['username']) ? $_POST['username'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
-    $rememberMe = isset($_POST['rememberme']) ? $_POST['rememberme'] : '';
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        $rememberMe = isset($_POST['rememberme']) ? $_POST['rememberme'] : '';
 
         $foundUser = $this->model->getUserByUsername($username);
 
@@ -52,9 +54,9 @@ class AuthController
             die("Invalid login credentials");
         }
 
+        $_SESSION['id'] = $foundUser['id'];
         $_SESSION['username'] = $foundUser['username'];
         $_SESSION['role'] = $foundUser['role_id'];
-        $_SESSION['password'] = $foundUser['password'];
 
         $userData = array(
             'id' => $foundUser['id'],
@@ -70,7 +72,7 @@ class AuthController
             );
         }
 
-        echo "User exist. Username: {$foundUser['username']}. Role: {$foundUser['role_id']}. Password: {$foundUser['password']}";
+        echo "User exist. Username: {$foundUser['username']}. Role: {$foundUser['role_id']}. ID: {$foundUser['id']}";
 
         print_r($foundUser);
     }
