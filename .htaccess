@@ -70,6 +70,10 @@
     RewriteCond %{REQUEST_URI} ^/js/main.js$ [NC]
     RewriteRule ^(.*)$ public/js/main.js [QSA,L]
 
+    # Allow to use main.css file
+    RewriteCond %{REQUEST_URI} ^/css/main.css$ [NC]
+    RewriteRule ^(.*)$ public/css/main.css [QSA,L]
+
     # To redirect all non-existing files to index.php
     # RewriteCond %{REQUEST_FILENAME} !-f [NC]
     # RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]

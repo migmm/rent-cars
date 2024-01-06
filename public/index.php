@@ -6,29 +6,32 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation buttons</title>
+    <title>Car rentals</title>
 </head>
-
+<link rel="stylesheet" href="css/main.css">
+</head>
 <body>
 
-    <h1>Select an option:</h1>
+<?php
 
-    <a href="cars.php">
-        <button>CarRouter</button>
-    </a>
+include '../views/partials/header/header.php';
 
-    <a href="users.php">
-        <button>UserRouter</button>
-    </a>
+?>
 
-    <a href="auth.php">
-        <button>LoginRouter</button>
-    </a>
+<?php
+
+include '../views/partials/main/main.php';
+
+?>
+
+<?php
+
+include '../views/partials/footer/footer.php';
+
+?>
 
 </body>
-
 </html>
