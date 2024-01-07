@@ -74,6 +74,10 @@
     RewriteCond %{REQUEST_URI} ^/css/main.css$ [NC]
     RewriteRule ^(.*)$ public/css/main.css [QSA,L]
 
+    # Allow to use files in the "images" directory
+    RewriteCond %{REQUEST_URI} ^/images/ [NC]
+    RewriteRule ^(.*)$ public/$1 [QSA,L]
+
     # To redirect all non-existing files to index.php
     # RewriteCond %{REQUEST_FILENAME} !-f [NC]
     # RewriteRule ^(.*)$ public/index.php?/$1 [QSA,L]
