@@ -12,10 +12,7 @@
             <li><a href="#">Checkins</a> </li>
             <li><a href="#">Locations</a> </li>
             <li><a href="#">Vehicles</a></li>
+            <li><a href="#">Sign in</a></li>
         </ul>
-        <a href="#" class="menu">
-        <div class="sign-in-button-nv">Sign in</div>
-    </a>
     </nav>
-
 </header>
