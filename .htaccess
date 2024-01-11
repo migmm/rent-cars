@@ -74,6 +74,10 @@
     RewriteCond %{REQUEST_URI} ^/css/main.css$ [NC]
     RewriteRule ^(.*)$ public/css/main.css [QSA,L]
 
+    # Allow to use favicon.ico file
+    RewriteCond %{REQUEST_URI} ^/favicon.ico$ [NC]
+    RewriteRule ^(.*)$ public/favicon.ico [QSA,L]
+
     # Allow to use files in the "images" directory
     RewriteCond %{REQUEST_URI} ^/images/ [NC]
     RewriteRule ^(.*)$ public/$1 [QSA,L]
