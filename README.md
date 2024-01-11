@@ -5,7 +5,7 @@ A portal for car rent builded in vanilla PHP, HTML, CSS and Javascript with MySQ
 --- THIS IS A WORK IN PROGRESS ---
 
 <p align="center">
-  <img src="https://github.com/migmm/rent-cars/blob/images/cars-logo.png" alt="Logo"/>
+  <img src="https://github.com/migmm/rent-cars/blob/images/logo.png" alt="Logo"/>
 </p>
 
 ## Features
