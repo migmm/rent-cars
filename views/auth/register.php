@@ -8,11 +8,11 @@
 
 <body>
     <h1>Register</h1>
-    <form action="auth.php?action=register" method="post">
+    <form action="users.php?action=storeUser" method="post">
 
         <?php
 
-        include('forms/formRegister.php');
+        include(__DIR__ . '/../users/createUser.php');
 
         ?>
 
