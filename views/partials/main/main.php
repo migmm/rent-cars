@@ -13,6 +13,7 @@
             </div>
             <div>
                 <input type="date">
+                <input type="select">
                 <input type="date">
                 <input type="submit">
             </div>

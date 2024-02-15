@@ -20,7 +20,7 @@ class UserModel
         $result = $this->db->query($query);
 
         $users = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $users[] = $row;
         }
 
@@ -29,11 +29,11 @@ class UserModel
 
     public function getUserById($userId)
     {
-        $userId = $this->db->real_escape_string($userId);
+        $userId = $this->db->quote($userId);
         $query = "SELECT * FROM users WHERE id = $userId";
         $result = $this->db->query($query);
 
-        return $result->fetch_assoc();
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getUserByUsername($user) {
@@ -46,13 +46,13 @@ class UserModel
 
     public function getRentalsByUserId($userId)
     {
-        $userId = $this->db->real_escape_string($userId);
+        $userId = $this->db->quote($userId);
         $query = "SELECT * FROM rentals WHERE user_id = $userId";
 
         $result = $this->db->query($query);
 
         $rentals = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $rentals[] = $row;
         }
 
@@ -61,13 +61,13 @@ class UserModel
 
     public function getPaymentMethodsByUserId($userId)
     {
-        $userId = $this->db->real_escape_string($userId);
+        $userId = $this->db->quote($userId);
         $query = "SELECT * FROM payment_methods WHERE user_id = $userId";
 
         $result = $this->db->query($query);
 
         $paymentMethods = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $paymentMethods[] = $row;
         }
 
@@ -76,13 +76,13 @@ class UserModel
 
     public function getUserPaymentMethods($userId)
     {
-        $userId = $this->db->real_escape_string($userId);
+        $userId = $this->db->quote($userId);
         $query = "SELECT * FROM payment_methods WHERE user_id = $userId";
 
         $result = $this->db->query($query);
 
         $paymentMethods = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $paymentMethods[] = $row;
         }
 
@@ -156,7 +156,7 @@ class UserModel
         $result = $statement->get_result();
 
         if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+            $row = $result->fetch(PDO::FETCH_ASSOC);
             return $row['profile_picture'];
         }
 
@@ -165,7 +165,7 @@ class UserModel
 
     public function deleteUser($userId)
     {
-        $userId = $this->db->real_escape_string($userId);
+        $userId = $this->db->quote($userId);
         $query = "DELETE FROM users WHERE id = $userId";
 
         return $this->db->query($query);

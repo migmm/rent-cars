@@ -14,22 +14,18 @@ class Connection
         $dbUser = $dotenv['DB_USER'];
         $dbPassword = $dotenv['DB_PASSWORD'];
 
-        $this->connection = pg_connect(
-            "host=$dbHost 
-            port=$dbPort 
-            dbname=$dbName 
-            user=$dbUser 
-            password=$dbPassword"
-        );
-
-        if (!$this->connection) {
-            die("Error de conexión a PostgreSQL.");
+        try {
+            $dsn = "pgsql:host=$dbHost;port=$dbPort;dbname=$dbName;user=$dbUser;password=$dbPassword";
+            $this->connection = new PDO($dsn);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Error de conexión a PostgreSQL: " . $e->getMessage());
         }
     }
 
     public function query($sql)
     {
-        return pg_query($this->connection, $sql);
+        return $this->connection->query($sql);
     }
 
     public function getConnection()
@@ -37,10 +33,9 @@ class Connection
         return $this->connection;
     }
 
-
     public function close()
     {
-        pg_close($this->connection);
+        $this->connection = null;
     }
 }
 

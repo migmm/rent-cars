@@ -9,26 +9,22 @@ class Connection
         $dotenv = parse_ini_file(__DIR__ . '/../.env');
 
         $dbHost = $dotenv['DB_HOST'];
-        $dbPort = $dotenv['DB_PORT'];
         $dbName = $dotenv['DB_NAME'];
         $dbUser = $dotenv['DB_USER'];
         $dbPassword = $dotenv['DB_PASSWORD'];
 
-        $this->connection = mysqli_connect(
-            $dbHost,
-            $dbUser,
-            $dbPassword,
-            $dbName,
-            $dbPort,
-        );
-
-        if (!$this->connection) {
-            die("Error de conexión a MySQL: " . mysqli_connect_error());
+        try {
+            $dsn = "mysql:host=$dbHost;dbname=$dbName";
+            $this->connection = new PDO($dsn, $dbUser, $dbPassword);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Error de conexión a MySQL: " . $e->getMessage());
         }
     }
+
     public function query($sql)
     {
-        return mysqli_query($this->connection, $sql);
+        return $this->connection->query($sql);
     }
 
     public function getConnection()
@@ -38,7 +34,7 @@ class Connection
 
     public function close()
     {
-        mysqli_close($this->connection);
+        $this->connection = null;
     }
 }
 
