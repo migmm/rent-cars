@@ -49,7 +49,7 @@ if ($car) {
     $result = $connection->query($query);
 
     if ($result) {
-        while ($city = mysqli_fetch_assoc($result)) {
+        while ($city = $result->fetch(PDO::FETCH_ASSOC)) {
             echo "<option value='{$city['id']}'>{$city['name']}</option>";
         }
     }
@@ -67,11 +67,11 @@ if ($car) {
     $result = $connection->query($query);
 
     if ($result) {
-        while ($country = mysqli_fetch_assoc($result)) {
+        while ($country = $result->fetch(PDO::FETCH_ASSOC)) {
             $selected = ($country['id'] == $car['country_id']) ? "selected" : "";
             echo "<option value='{$country['id']}' $selected>{$country['name']}</option>";
         }
-    }
+    }    
 
     ?>
 
@@ -86,7 +86,7 @@ if ($car) {
     $result = $connection->query($query);
 
     if ($result) {
-        while ($category = mysqli_fetch_assoc($result)) {
+        while ($category = $result->fetch(PDO::FETCH_ASSOC)) {
             $selected = ($category['id'] == $car['category_id']) ? "selected" : "";
             echo "<option value='{$category['id']}' $selected>{$category['name']}</option>";
         }
@@ -111,7 +111,7 @@ if ($car) {
     $result = $connection->query($query);
 
     if ($result) {
-        while ($user = mysqli_fetch_assoc($result)) {
+        while ($user = $result->fetch(PDO::FETCH_ASSOC)) {
             $selected = ($user['id'] == $car['user_id']) ? "selected" : "";
             echo "<option value='{$user['id']}'$selected>{$user['first_name']} {$user['last_name']}</option>";
         }
@@ -146,9 +146,17 @@ if ($car) {
         </label><br> -->
 
 <label>Image:</label>
-<?php foreach ($carImages as $carImage) : ?>
-    <img src="<?php echo $carImage; ?>" alt="Car Image">
-<?php endforeach; ?>
+
+<?php if (empty($carImages)): ?>
+    <!-- Display default image -->
+    <img src="default_image.jpg" alt="Default Car Image">
+<?php else: ?>
+    <!-- Display car images -->
+    <?php foreach ($carImages as $carImage): ?>
+        <img src="<?php echo $carImage; ?>" alt="Car Image">
+    <?php endforeach; ?>
+<?php endif; ?>
+
 
 <input type="file" name="images[]" multiple accept="image/*" onchange="previewCarImages(event)"><br>
 

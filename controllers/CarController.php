@@ -166,6 +166,10 @@ class RentalCarController
         }
 
         $sourceImage = imagecreatefromjpeg($sourcePath);
+
+        $newWidth = round($newWidth);
+        $newHeight = round($newHeight);
+
         $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
 
         imagecopyresampled(

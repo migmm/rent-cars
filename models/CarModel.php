@@ -38,36 +38,47 @@ class RentalCarModel
     public function createCar($name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id)
     {
         $query = "INSERT INTO cars (
-            name, 
-            brand, 
-            year, 
-            transmission, 
-            passengers, 
-            city_id, 
-            country_id, 
-            rental_id,
-            category_id,
-            air_conditioner, 
-            consumption, 
-            user_id 
+        name, 
+        brand, 
+        year, 
+        transmission, 
+        passengers, 
+        city_id, 
+        country_id, 
+        rental_id,
+        category_id,
+        air_conditioner, 
+        consumption, 
+        user_id 
     ) 
     VALUES (
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?, 
-        ?
+        :name, 
+        :brand, 
+        :year, 
+        :transmission, 
+        :passengers, 
+        :city_id, 
+        :country_id, 
+        :rental_id, 
+        :category_id, 
+        :air_conditioner, 
+        :consumption, 
+        :user_id 
     )";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssisiiiiidii', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $rental_id, $category_id, $air_conditioner, $consumption, $user_id);
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':brand', $brand);
+        $stmt->bindValue(':year', $year, PDO::PARAM_INT);
+        $stmt->bindValue(':transmission', $transmission);
+        $stmt->bindValue(':passengers', $passengers, PDO::PARAM_INT);
+        $stmt->bindValue(':city_id', $city_id, PDO::PARAM_INT);
+        $stmt->bindValue(':country_id', $country_id, PDO::PARAM_INT);
+        $stmt->bindValue(':rental_id', $rental_id, PDO::PARAM_INT);
+        $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->bindValue(':air_conditioner', $air_conditioner, PDO::PARAM_BOOL);
+        $stmt->bindValue(':consumption', $consumption, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $user_id);
 
         return $stmt->execute();
     }
@@ -75,45 +86,59 @@ class RentalCarModel
     public function updateCar($id, $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $rental_id)
     {
         $query = "UPDATE cars SET 
-                    name = ?, 
-                    brand = ?, 
-                    year = ?, 
-                    transmission = ?, 
-                    passengers = ?, 
-                    city_id = ?, 
-                    country_id = ?, 
-                    category_id = ?,
-                    air_conditioner = ?, 
-                    consumption = ?, 
-                    user_id = ?, 
-                    rental_id = ?
-                    WHERE id = ?";
+                name = :name, 
+                brand = :brand, 
+                year = :year, 
+                transmission = :transmission, 
+                passengers = :passengers, 
+                city_id = :city_id, 
+                country_id = :country_id, 
+                category_id = :category_id,
+                air_conditioner = :air_conditioner, 
+                consumption = :consumption, 
+                user_id = :user_id, 
+                rental_id = :rental_id
+                WHERE id = :id";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssisiiiiidiii', $name, $brand, $year, $transmission, $passengers, $city_id, $country_id, $category_id, $air_conditioner, $consumption, $user_id, $rental_id, $id);
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':brand', $brand);
+        $stmt->bindValue(':year', $year, PDO::PARAM_INT);
+        $stmt->bindValue(':transmission', $transmission);
+        $stmt->bindValue(':passengers', $passengers, PDO::PARAM_INT);
+        $stmt->bindValue(':city_id', $city_id, PDO::PARAM_INT);
+        $stmt->bindValue(':country_id', $country_id, PDO::PARAM_INT);
+        $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->bindValue(':air_conditioner', $air_conditioner, PDO::PARAM_BOOL);
+        $stmt->bindValue(':consumption', $consumption, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->bindValue(':rental_id', $rental_id, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $stmt->execute();
     }
+
 
     public function storeCarImage($carId, $imageName)
-    {
-        $query = "INSERT INTO car_images (car_id, image_name) VALUES (?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('is', $carId, $imageName);
-        return $stmt->execute();
-    }
+{
+    $query = "INSERT INTO car_images (car_id, image_name) VALUES (:car_id, :image_name)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindValue(':car_id', $carId, PDO::PARAM_INT);
+    $stmt->bindValue(':image_name', $imageName, PDO::PARAM_STR);
+    return $stmt->execute();
+}
 
     public function getCarImages($carId)
     {
         $carId = $this->db->quote($carId);
         $query = "SELECT * FROM car_images WHERE car_id = $carId";
         $result = $this->db->query($query);
-    
+
         $images = [];
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $images[] = $row['image_name'];
         }
-    
+
         return $images;
     }
 
@@ -125,5 +150,3 @@ class RentalCarModel
         return $this->db->query($query);
     }
 }
-
-?>
