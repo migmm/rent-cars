@@ -37,11 +37,11 @@ class UserModel
     }
 
     public function getUserByUsername($user) {
-        $stmt = $this->db->prepare("SELECT id, username, password, role_id FROM users WHERE username = ?");
-        $stmt->bind_param("s", $user);
+        $stmt = $this->db->prepare("SELECT id, username, password, role_id FROM users WHERE username = :username");
+        $stmt->bindParam(":username", $user);
         $stmt->execute();
     
-        return $stmt->get_result()->fetch_assoc();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getRentalsByUserId($userId)
