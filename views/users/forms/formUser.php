@@ -49,7 +49,7 @@ if ($user) {
     $result = $connection->query($query);
 
     if ($result) {
-        while ($city = mysqli_fetch_assoc($result)) {
+        while ($city = $result->fetch(PDO::FETCH_ASSOC)) {
             echo "<option value='{$city['id']}'>{$city['name']}</option>";
         }
     }
@@ -67,7 +67,7 @@ if ($user) {
     $result = $connection->query($query);
 
     if ($result) {
-        while ($country = mysqli_fetch_assoc($result)) {
+        while ($country = $result->fetch(PDO::FETCH_ASSOC)) {
             $selected = ($country['id'] == $user['country_id']) ? "selected" : "";
             echo "<option value='{$country['id']}' $selected>{$country['name']}</option>";
         }
@@ -86,7 +86,7 @@ if ($user) {
     $result = $connection->query($query);
 
     if ($result) {
-        while ($role = mysqli_fetch_assoc($result)) {
+        while ($role = $result->fetch(PDO::FETCH_ASSOC)) {
             $selected = ($role['id'] == $user['role_id']) ? "selected" : "";
             echo "<option value='{$role['id']}' $selected>{$role['role_name']}</option>";
         }

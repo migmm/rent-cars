@@ -102,48 +102,65 @@ class UserModel
             profile_picture
         ) 
         VALUES (
-            ?,
-            ?,
-            ?,
-            ?,
-            ?,
-            ?,
-            ?,
-            ?,
-            ?
+            :first_name,
+            :last_name,
+            :username,
+            :email,
+            :city_id,
+            :country_id,
+            :password,
+            :role_id,
+            :profile_picture
         )";
-
+    
         $stmt = $this->db->prepare($query);
-
-        $stmt->bind_param("ssssiisis", $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture);
-
+    
+        $stmt->bindParam(":first_name", $first_name);
+        $stmt->bindParam(":last_name", $last_name);
+        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":city_id", $city_id);
+        $stmt->bindParam(":country_id", $country_id);
+        $stmt->bindParam(":password", $password);
+        $stmt->bindParam(":role_id", $role_id);
+        $stmt->bindParam(":profile_picture", $profile_picture);
+    
         return $stmt->execute();
     }
 
     public function updateUser($id, $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture)
-    {
-        $query = "UPDATE users SET 
-                    first_name = ?,
-                    last_name = ?,
-                    username = ?,
-                    email = ?,
-                    city_id = ?,
-                    country_id = ?,
-                    password = ?,
-                    role_id = ?,
-                    profile_picture = ?
-                    WHERE id = ?";
+{
+    $query = "UPDATE users SET 
+                first_name = :first_name,
+                last_name = :last_name,
+                username = :username,
+                email = :email,
+                city_id = :city_id,
+                country_id = :country_id,
+                password = :password,
+                role_id = :role_id,
+                profile_picture = :profile_picture
+                WHERE id = :id";
 
-        $stmt = $this->db->prepare($query);
+    $stmt = $this->db->prepare($query);
 
-        $stmt->bind_param("ssssiisisi", $first_name, $last_name, $username, $email, $city_id, $country_id, $password, $role_id, $profile_picture, $id);
+    $stmt->bindParam(":first_name", $first_name);
+    $stmt->bindParam(":last_name", $last_name);
+    $stmt->bindParam(":username", $username);
+    $stmt->bindParam(":email", $email);
+    $stmt->bindParam(":city_id", $city_id);
+    $stmt->bindParam(":country_id", $country_id);
+    $stmt->bindParam(":password", $password);
+    $stmt->bindParam(":role_id", $role_id);
+    $stmt->bindParam(":profile_picture", $profile_picture);
+    $stmt->bindParam(":id", $id);
 
-        $result = $stmt->execute();
+    $result = $stmt->execute();
 
-        $stmt->close();
+    $stmt->close();
 
-        return $result;
-    }
+    return $result;
+}
 
     public function getUserPhotoPath($userId)
     {

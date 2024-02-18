@@ -199,7 +199,6 @@ class RentalCarController
         imagedestroy($sourceImage);
         imagedestroy($resizedImage);
     }
-    
 
     public function deleteCar($carId)
     {
