@@ -1,4 +1,6 @@
-/* Main styles */
+/***********************************************/
+/*********** Main colors and styles ************/
+/***********************************************/
 :root{
     --white: #f9f9f9;
     --black: #36383F;
@@ -7,7 +9,9 @@
 }
 
 
-/* Reset */
+/***********************************************/
+/**************** Reset Styles *****************/
+/***********************************************/
 *{
     margin: 0;
     padding: 0;
@@ -28,7 +32,9 @@ ul{
 }
 
 
-/* Header */
+/***********************************************/
+/******************* Header ********************/
+/***********************************************/
 .header{
     background-color: var(--orange);
     box-shadow: 1px 1px 5px 0px var(--grey);
@@ -38,7 +44,9 @@ ul{
 }
 
 
-/* Logo */
+/***********************************************/
+/******************** Logo *********************/
+/***********************************************/
 .logo{
     display: inline-block;
     margin: 10px;
@@ -49,7 +57,9 @@ width: 200px;
 }
 
 
-/* Nav menu */
+/***********************************************/
+/****************** Nav menu *******************/
+/***********************************************/
 .nav{
     width: 100%;
     height: 100%;
@@ -76,7 +86,9 @@ width: 200px;
 }
 
 
-/* Menu Icon */
+/***********************************************/
+/************** Hamburguer menu ****************/
+/***********************************************/
 .hamburguer-button{
     cursor: pointer;
     float: right;
@@ -117,7 +129,9 @@ width: 200px;
 }
 
 
-/* Toggle menu icon */
+/***********************************************/
+/************** Toggle menu icon ***************/
+/***********************************************/
 .side-menu:checked ~ nav{
     max-height: 100%;
 }
@@ -138,7 +152,9 @@ width: 200px;
 }
 
 
-/* Responsiveness */
+/***********************************************/
+/*************** Responsiveness ****************/
+/***********************************************/
 @media (min-width: 768px) {
     .nav{
         max-height: none;
@@ -162,4 +178,55 @@ width: 200px;
     .hamburguer-button{
         display: none;
     }
+}
+
+
+/***********************************************/
+/************ Landing home section *************/
+/***********************************************/
+main {
+    max-width: 1200;
+}
+
+.island-container {
+    width: 80%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.island-top-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.island-selector-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.island-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.car-cards {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.car-cards-text {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.faq{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
