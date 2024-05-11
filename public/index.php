@@ -34,5 +34,6 @@ include '../views/partials/footer/footer.php';
 
 ?>
 
+<script src="js/main.js"></script>
 </body>
 </html>
