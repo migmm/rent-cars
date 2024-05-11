@@ -139,7 +139,7 @@
                 <h1>Rental car fleet around the world</h1>
                 <p> We have a diverse fleet of rental vehicles around the world for you to choose from, ensuring you find the one that best suits your needs and preferences. We offer quality and safety at the best price.</p>
             </div>
-            <div>
+            <div class="car-card-container">
                 <div class="car-card"></div>
                 <div class="car-card"></div>
                 <div class="car-card"></div>
