@@ -3,20 +3,21 @@ async function getCities() {
     var citySelect = document.getElementById("citySelect");
 
     var selectedCountry = countrySelect.value;
+    if (citySelect && countrySelect) {
+        try {
+            var response = await fetch(`utils/getCities.php?country_id=${selectedCountry}`);
+            var cities = await response.json();
 
-    try {
-        var response = await fetch(`utils/getCities.php?country_id=${selectedCountry}`);
-        var cities = await response.json();
-
-        citySelect.innerHTML = "";
-        for (var i = 0; i < cities.length; i++) {
-            var option = document.createElement("option");
-            option.value = cities[i].id;
-            option.text = cities[i].name;
-            citySelect.add(option);
+            citySelect.innerHTML = "";
+            for (var i = 0; i < cities.length; i++) {
+                var option = document.createElement("option");
+                option.value = cities[i].id;
+                option.text = cities[i].name;
+                citySelect.add(option);
+            }
+        } catch (error) {
+            console.error("Error al obtener ciudades:", error);
         }
-    } catch (error) {
-        console.error("Error al obtener ciudades:", error);
     }
 }
 
@@ -27,7 +28,7 @@ function previewProfilePicture(event) {
     const file = input.files[0];
     if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             preview.src = e.target.result;
         };
         reader.readAsDataURL(file);
@@ -58,5 +59,19 @@ function previewCarImages(event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     getCities();
+});
+
+
+
+/************************************************/
+/**************** FAQ Dropdown ******************/
+/************************************************/
+
+const questions = document.querySelectorAll('.question');
+questions.forEach(function (question) {
+    question.querySelector('.question-text').addEventListener('click', function (event) {
+        event.stopPropagation();
+        question.querySelector('.answer').classList.toggle('active');
+    });
 });
 
