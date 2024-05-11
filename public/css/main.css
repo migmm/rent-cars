@@ -6,6 +6,7 @@
     --black: #36383f;
     --grey: #85888c;
     --orange: #fcb002;
+    --light-grey: #e2e2e2;
 }
 
 /***********************************************/
@@ -180,6 +181,8 @@ main {
     margin: 30px auto;
     display: flex;
     flex-direction: column;
+    background-color: #36383f;
+    padding: 20px;
 }
 
 .island-top-menu {
@@ -219,13 +222,10 @@ main {
     align-items: center;
 }
 
+
 /***********************************************/
 /*********** Input in landing styles ***********/
 /***********************************************/
-.input-container {
-    
-
-}
 .input-container input,
 .input-container select {
     padding: 10px;
@@ -248,4 +248,34 @@ main {
     background-color: var(--orange);
     border: none;
     padding: 10px;
+}
+
+
+/***********************************************/
+/***************** FAQ Styles ******************/
+/***********************************************/
+.question {
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid  var(--light-grey);
+    width: 700px;
+    max-width: 700px;
+}
+
+.question-text {
+    padding: 10px;
+    font-weight: 600;
+}
+
+.question-text:hover {
+    background-color: var(--light-grey);
+}
+
+.answer {
+    display: none;
+    padding: 10px;
+}
+
+.answer.active {
+    display: block;
 }
