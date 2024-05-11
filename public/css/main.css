@@ -172,14 +172,17 @@ ul {
 /************ Landing home section *************/
 /***********************************************/
 main {
-    max-width: 1200;
+    margin: 0;
 }
 
 .first-section {
     height: 100vh;
-    background-image: url("../images/background-landing.jpg");
+    max-width: 1900px;
+    width: 1900px;
+    background-image: url('../images/background-landing.jpg');
     background-size: 100% auto;
     background-repeat: no-repeat;
+    padding-top: 200px;
 }
 
 .island-container {
@@ -228,7 +231,6 @@ main {
     align-items: center;
 }
 
-
 /***********************************************/
 /*********** Input in landing styles ***********/
 /***********************************************/
@@ -256,14 +258,13 @@ main {
     padding: 10px;
 }
 
-
 /***********************************************/
 /***************** FAQ Styles ******************/
 /***********************************************/
 .question {
     margin-bottom: 10px;
     cursor: pointer;
-    border: 1px solid  var(--light-grey);
+    border: 1px solid var(--light-grey);
     width: 700px;
     max-width: 700px;
 }
