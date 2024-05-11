@@ -178,7 +178,6 @@ main {
 .first-section {
     height: 100vh;
     max-width: 1900px;
-    width: 1900px;
     background-image: url('../images/background-landing.jpg');
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -190,7 +189,7 @@ main {
     margin: auto auto;
     display: flex;
     flex-direction: column;
-    background-color: #36383f;
+    background-color: var(--white);
     padding: 20px;
 }
 
@@ -249,7 +248,7 @@ main {
     top: 10px;
     transform: translateY(-50%);
     font-size: 14px;
-    color: #999;
+    color: var(--light-grey);
 }
 
 .btn-continue {
