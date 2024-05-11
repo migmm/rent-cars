@@ -173,12 +173,18 @@ ul {
 /***********************************************/
 main {
     max-width: 1200;
-    margin: 1em;
+}
+
+.first-section {
+    height: 100vh;
+    background-image: url("../images/background-landing.jpg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
 }
 
 .island-container {
     width: 80%;
-    margin: 30px auto;
+    margin: auto auto;
     display: flex;
     flex-direction: column;
     background-color: #36383f;
