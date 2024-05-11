@@ -10,7 +10,7 @@
                 </div>
                 <div class="island-selector-menu">
                     <div class="input-container">
-                    <input type="text" name="city" id="city">
+                        <input type="text" name="city" id="city">
                         <label for="city">Pick-up city</label>
 
                     </div>
@@ -147,17 +147,22 @@
         <section class="faq">
             <h2>Frequently asked questions about car rental</h2>
             <div>
-                <div>What is the price of car rental?</div>
-                <div>The minimum price to rent a car may vary depending on the type of vehicle and additional services requested. We offer a wide selection of vehicles, from economical options to high-end luxury car rental services. You can check our complete fleet of rental cars here.</div>
-
-                <div>How can I find rental cars near me?</div>
-                <div>We have multiple car rental depots around the world. To find the nearest car rental branch, you can click on the link above.</div>
-
-                <div>What does the car rental service include?</div>
-                <div>The car rental service includes basic coverage for driving, 24/7 roadside assistance, theft and third-party damage insurance, and usually unlimited mileage. Additional services such as baby seats, GPS, and extra drivers are also available.</div>
-
-                <div>Can I rent a car for just one day? Are there any minimum rental periods?</div>
-                <div>Yes, it is possible to rent a car for just one day, although the rental rates may vary depending on the duration and type of vehicle you choose.</div>
+                <div class="question">
+                    <div class="question-text">What is the price of car rental?</div>
+                    <div class="answer">The minimum price to rent a car may vary depending on the type of vehicle and additional services requested. We offer a wide selection of vehicles, from economical options to high-end luxury car rental services. You can check our complete fleet of rental cars here.</div>
+                </div>
+                <div class="question">
+                    <div class="question-text">How can I find rental cars near me?</div>
+                    <div class="answer">We have multiple car rental depots around the world. To find the nearest car rental branch, you can click on the link above.</div>
+                </div>
+                <div class="question">
+                    <div class="question-text">What does the car rental service include?</div>
+                    <div class="answer">The car rental service includes basic coverage for driving, 24/7 roadside assistance, theft and third-party damage insurance, and usually unlimited mileage. Additional services such as baby seats, GPS, and extra drivers are also available.</div>
+                </div>
+                <div class="question">
+                    <div class="question-text">Can I rent a car for just one day? Are there any minimum rental periods?</div>
+                    <div class="answer">Yes, it is possible to rent a car for just one day, although the rental rates may vary depending on the duration and type of vehicle you choose.</div>
+                </div>
             </div>
         </section>
     </main>
